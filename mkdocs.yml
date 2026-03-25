@@ -1,0 +1,22 @@
+site_name: Munger-Matics
+site_description: Personal accounting, budgeting and financial planning application
+site_url: https://ranajoy-cosmo.github.io/munger-matics/
+repo_url: https://github.com/ranajoy-cosmo/munger-matics
+repo_name: ranajoy-cosmo/munger-matics
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: teal
+    accent: cyan
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Contributing: contributing.md

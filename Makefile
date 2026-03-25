@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install run test lint format
+.PHONY: help install run test lint format docs
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
@@ -19,3 +19,6 @@ lint: ## Check code style
 
 format: ## Format code
 	uv run ruff format src/ app/
+
+docs: ## Serve documentation locally
+	uv run mkdocs serve

@@ -21,5 +21,4 @@ make run
 
 ## Development
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, branching conventions, and workflow.
-See [ARCHITECTURE.md](ARCHITECTURE.md) for project structure and design decisions.
+See the [documentation site](https://ranajoy-cosmo.github.io/munger-matics/) for full details on setup, architecture and contributing.
