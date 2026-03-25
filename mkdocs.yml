@@ -20,3 +20,10 @@ nav:
   - Getting Started: getting-started.md
   - Architecture: architecture.md
   - Contributing: contributing.md
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
