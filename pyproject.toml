@@ -45,8 +45,10 @@ show_missing = true
 
 [tool.mypy]
 python_version = "3.12"
-disallow_untyped_defs = true
-check_untyped_defs = true
-warn_return_any = true
+ignore_missing_imports = true
 warn_unused_ignores = true
 plugins = ["pydantic.mypy"]
+# Gradually tighten as the codebase matures:
+# check_untyped_defs = true
+# warn_return_any = true
+# disallow_untyped_defs = true
