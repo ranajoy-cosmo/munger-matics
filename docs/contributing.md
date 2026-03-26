@@ -57,6 +57,7 @@ TYPE(scope): short description
 | `TEST` | adding or updating tests |
 | `DOCS` | documentation only |
 | `DATA` | data pipeline or ingestion work |
+| `FLOW` | Prefect orchestration work |
 
 **Examples:**
 
@@ -67,6 +68,7 @@ CHORE(deps): update polars to 1.2.0
 TEST(budget): add edge cases for negative balances
 DOCS(contributing): add branch naming conventions
 DATA(ingest): add CSV import for bank statements
+FLOW(budget): add weekly budget sync flow
 ```
 
 **Rules:**
@@ -102,7 +104,12 @@ CI runs this on every PR. All code in `src/` must pass mypy before merging. Pyda
 
 ## Pre-commit Hooks
 
-Pre-commit hooks run `ruff` automatically on every commit, before the commit lands. This catches lint and formatting issues at the source rather than in CI.
+Pre-commit hooks run two checks automatically on every commit:
+
+- `ruff check --fix` — lints and auto-applies safe fixes
+- `ruff format` — enforces consistent formatting
+
+This catches and corrects issues before they reach CI. If a hook fails and cannot auto-fix, the commit is aborted — fix the issue and commit again.
 
 Install the hooks once after cloning:
 
