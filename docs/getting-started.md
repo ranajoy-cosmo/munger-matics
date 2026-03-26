@@ -14,6 +14,9 @@ cd munger-matics
 
 # Install all dependencies (runtime + dev)
 make install
+
+# Install pre-commit hooks
+make hooks
 ```
 
 ## Environment Variables
@@ -33,8 +36,9 @@ This starts the Streamlit dashboard at `http://localhost:8501`.
 | Command | Description |
 |---|---|
 | `make install` | Install all dependencies |
+| `make hooks` | Install pre-commit hooks |
 | `make run` | Run the Streamlit dashboard |
-| `make test` | Run tests |
+| `make test` | Run tests with coverage report |
 | `make lint` | Check code style |
 | `make format` | Auto-format code |
 | `make docs` | Serve documentation locally at `http://127.0.0.1:8000` |
@@ -44,7 +48,7 @@ This starts the Streamlit dashboard at `http://localhost:8501`.
 Dependencies are split into groups in `pyproject.toml`:
 
 - **`[project] dependencies`** — runtime deps, always installed
-- **`[dependency-groups] dev`** — development tools only (pytest, ruff, mkdocs-material)
+- **`[dependency-groups] dev`** — development tools only (pytest, pytest-cov, ruff, mkdocs-material, pre-commit)
 
 ```bash
 # Add a runtime dependency

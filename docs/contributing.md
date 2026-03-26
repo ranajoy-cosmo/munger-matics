@@ -88,3 +88,15 @@ make format    # auto-fix formatting
 ```
 
 Run both before pushing. CI will fail on lint errors.
+
+## Pre-commit Hooks
+
+Pre-commit hooks run `ruff` automatically on every commit, before the commit lands. This catches lint and formatting issues at the source rather than in CI.
+
+Install the hooks once after cloning:
+
+```bash
+make hooks
+```
+
+After that, every `git commit` will trigger the checks automatically. If a hook fails, the commit is aborted — fix the issue and commit again.
