@@ -12,6 +12,9 @@ wheels/
 # Environment variables
 .env
 
+# Local Claude Code instructions (personal/sensitive context)
+CLAUDE.local.md
+
 # Data files (may contain sensitive financial data)
 data/raw/*
 !data/raw/.gitkeep
