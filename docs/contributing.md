@@ -100,12 +100,14 @@ Type checking uses [mypy](https://mypy.readthedocs.io/) with the Pydantic plugin
 make typecheck
 ```
 
-Configuration enforces:
-- All functions in `src/` must have type annotations
-- Return types are checked and `Any` returns are flagged
+Current configuration:
+- Missing imports are silenced — many packages don't ship type stubs
 - `# type: ignore` comments are kept honest via `warn_unused_ignores`
+- Pydantic models are checked via the mypy Pydantic plugin
 
-CI runs this on every PR. Pydantic models get both compile-time checking via mypy and runtime validation automatically.
+Stricter settings (`disallow_untyped_defs`, `warn_return_any`) are commented out in `pyproject.toml` and will be enabled gradually as the codebase matures.
+
+CI runs mypy on every PR.
 
 ## Pre-commit Hooks
 
