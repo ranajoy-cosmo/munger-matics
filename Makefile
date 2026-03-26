@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install run test lint format docs hooks
+.PHONY: help install run test lint typecheck format docs hooks
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
@@ -19,6 +19,9 @@ test: ## Run tests with coverage
 
 lint: ## Check code style
 	uv run ruff check src/ app/
+
+typecheck: ## Run type checking
+	uv run mypy src/
 
 format: ## Format code
 	uv run ruff format src/ app/

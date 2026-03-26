@@ -89,6 +89,16 @@ make format    # auto-fix formatting
 
 Run both before pushing. CI will fail on lint errors.
 
+## Type Checking
+
+Type checking uses [mypy](https://mypy.readthedocs.io/) in strict mode, with the Pydantic plugin enabled.
+
+```bash
+make typecheck
+```
+
+CI runs this on every PR. All code in `src/` must pass mypy before merging. Pydantic models get both compile-time checking via mypy and runtime validation automatically.
+
 ## Pre-commit Hooks
 
 Pre-commit hooks run `ruff` automatically on every commit, before the commit lands. This catches lint and formatting issues at the source rather than in CI.
