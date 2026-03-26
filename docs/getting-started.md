@@ -12,7 +12,7 @@
 git clone https://github.com/ranajoy-cosmo/munger-matics.git
 cd munger-matics
 
-# Install all dependencies (runtime + dev)
+# Install runtime + dev dependencies
 make install
 
 # Install pre-commit hooks
@@ -40,7 +40,9 @@ This starts the Streamlit dashboard at `http://localhost:8501`.
 | `make run` | Run the Streamlit dashboard |
 | `make test` | Run tests with coverage report |
 | `make lint` | Check code style |
+| `make typecheck` | Run mypy type checking |
 | `make format` | Auto-format code |
+| `make format-check` | Check formatting without modifying (used in CI) |
 | `make docs` | Serve documentation locally at `http://127.0.0.1:8000` |
 
 ## Dependency Groups
@@ -48,7 +50,8 @@ This starts the Streamlit dashboard at `http://localhost:8501`.
 Dependencies are split into groups in `pyproject.toml`:
 
 - **`[project] dependencies`** — runtime deps, always installed
-- **`[dependency-groups] dev`** — development tools only (pytest, pytest-cov, ruff, mkdocs-material, pre-commit)
+- **`[dependency-groups] dev`** — development tools (pytest, ruff, mypy, mkdocs-material, pre-commit)
+- **`[dependency-groups] flows`** — Prefect orchestration, installed only when working on pipelines
 
 ```bash
 # Add a runtime dependency
@@ -56,6 +59,9 @@ uv add some-package
 
 # Add a dev-only dependency
 uv add --group dev some-tool
+
+# Install the flows group to work on Prefect pipelines
+uv sync --group flows
 ```
 
 Always commit `uv.lock` after adding or updating dependencies.

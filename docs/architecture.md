@@ -56,8 +56,11 @@ The orchestration directory is named after what it does, not the tool used to do
 |---|---|---|
 | [uv](https://docs.astral.sh/uv/) | Environment & dependency management | Fast, modern, single tool for venv + packages + lockfile |
 | [Polars](https://docs.pola.rs/) | Data manipulation | Faster than Pandas, expressive API, strong typing |
+| [Pydantic](https://docs.pydantic.dev/) | Data validation | Enforces data model correctness at runtime using type annotations |
 | [Streamlit](https://streamlit.io/) | Dashboard | Low-friction Python-native UI, no frontend knowledge required |
 | [Prefect](https://www.prefect.io/) | Orchestration | Manages scheduled and triggered data pipelines |
 | [Ruff](https://docs.astral.sh/ruff/) | Linting & formatting | Replaces Flake8 + Black + isort in a single fast tool |
+| [mypy](https://mypy.readthedocs.io/) | Type checking | Catches type errors at development time before runtime |
 | [pytest](https://pytest.org/) | Testing | Standard, well-supported Python test framework |
 | [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) | Documentation site | Markdown-based, Python-native, deploys to GitHub Pages |
+| [Dependabot](https://docs.github.com/en/code-security/dependabot) | Dependency updates | Automated weekly PRs for outdated dependencies |
