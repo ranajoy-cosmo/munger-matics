@@ -83,11 +83,12 @@ DATA(ingest): add CSV import for bank statements
 Linting and formatting use [Ruff](https://docs.astral.sh/ruff/).
 
 ```bash
-make lint      # check for issues
-make format    # auto-fix formatting
+make lint          # check for lint issues
+make format        # auto-fix formatting
+make format-check  # check formatting without modifying (what CI runs)
 ```
 
-Run both before pushing. CI will fail on lint errors.
+Pre-commit hooks auto-fix formatting on every commit. CI enforces both lint and format check on every PR — a PR with either violation will not pass.
 
 ## Type Checking
 

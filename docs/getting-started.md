@@ -42,6 +42,7 @@ This starts the Streamlit dashboard at `http://localhost:8501`.
 | `make lint` | Check code style |
 | `make typecheck` | Run mypy type checking |
 | `make format` | Auto-format code |
+| `make format-check` | Check formatting without modifying (used in CI) |
 | `make docs` | Serve documentation locally at `http://127.0.0.1:8000` |
 
 ## Dependency Groups

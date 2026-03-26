@@ -13,5 +13,7 @@ wheels/
 .env
 
 # Data files (may contain sensitive financial data)
-data/raw/
-data/processed/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep

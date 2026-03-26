@@ -21,6 +21,7 @@ make hooks
 | `make lint` | Check code style |
 | `make typecheck` | Run mypy type checking |
 | `make format` | Auto-format code |
+| `make format-check` | Check formatting without modifying (used in CI) |
 | `make hooks` | Install pre-commit hooks |
 | `make docs` | Serve documentation locally |
 
