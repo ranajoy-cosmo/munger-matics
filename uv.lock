@@ -1299,7 +1299,6 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "polars" },
-    { name = "prefect" },
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "streamlit" },
@@ -1314,11 +1313,13 @@ dev = [
     { name = "pytest-cov" },
     { name = "ruff" },
 ]
+flows = [
+    { name = "prefect" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "polars", specifier = ">=1.0.0" },
-    { name = "prefect", specifier = ">=3.0.0" },
     { name = "pydantic", specifier = ">=2.0.0" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "streamlit", specifier = ">=1.45.0" },
@@ -1333,6 +1334,7 @@ dev = [
     { name = "pytest-cov", specifier = ">=6.0.0" },
     { name = "ruff", specifier = ">=0.9.0" },
 ]
+flows = [{ name = "prefect", specifier = ">=3.0.0" }]
 
 [[package]]
 name = "mypy"

@@ -6,7 +6,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
 
 install: ## Install all dependencies
-	uv sync --all-groups
+	uv sync --group dev
 
 hooks: ## Install pre-commit hooks
 	uv run pre-commit install

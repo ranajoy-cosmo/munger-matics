@@ -94,13 +94,18 @@ Pre-commit hooks auto-fix formatting on every commit. CI enforces both lint and 
 
 ## Type Checking
 
-Type checking uses [mypy](https://mypy.readthedocs.io/) in strict mode, with the Pydantic plugin enabled.
+Type checking uses [mypy](https://mypy.readthedocs.io/) with the Pydantic plugin enabled.
 
 ```bash
 make typecheck
 ```
 
-CI runs this on every PR. All code in `src/` must pass mypy before merging. Pydantic models get both compile-time checking via mypy and runtime validation automatically.
+Configuration enforces:
+- All functions in `src/` must have type annotations
+- Return types are checked and `Any` returns are flagged
+- `# type: ignore` comments are kept honest via `warn_unused_ignores`
+
+CI runs this on every PR. Pydantic models get both compile-time checking via mypy and runtime validation automatically.
 
 ## Pre-commit Hooks
 
