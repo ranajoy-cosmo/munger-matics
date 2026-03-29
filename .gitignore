@@ -20,3 +20,7 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+# Notebooks — exploration only, not version controlled
+notebooks/*
+!notebooks/.gitkeep
