@@ -1,21 +1,3 @@
 {
-    "makefile.configureOnOpen": false,
-
-    "vim.enable": true,
-    "vim.leader": ",",
-    "vim.useSystemClipboard": true,
-    "vim.hlsearch": true,
-    "vim.cursorStylePerMode.normal": "block",
-    "vim.cursorStylePerMode.insert": "line",
-
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<C-n>"],
-            "commands": ["workbench.action.toggleSidebarVisibility"]
-        },
-        {
-            "before": ["<space>"],
-            "commands": ["editor.toggleFold"]
-        }
-    ]
+    "makefile.configureOnOpen": false
 }
