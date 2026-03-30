@@ -15,6 +15,9 @@ wheels/
 # Local Claude Code instructions (personal/sensitive context)
 CLAUDE.local.md
 
+# Notebooks (exploration only — not version controlled)
+notebooks/
+
 # Data files (may contain sensitive financial data)
 data/raw/*
 !data/raw/.gitkeep
