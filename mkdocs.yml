@@ -21,6 +21,9 @@ nav:
   - Architecture: architecture.md
   - Contributing: contributing.md
 
+exclude_docs: |
+  design/
+
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
