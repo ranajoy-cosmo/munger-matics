@@ -1,26 +1,15 @@
 from __future__ import annotations
 
-from decimal import Decimal, ROUND_HALF_UP
-from enum import IntEnum
+from decimal import Decimal
 
+from munger_matics.finance._common import CompoundingFreq, _quantize
 
-class CompoundingFreq(IntEnum):
-    """Number of compounding periods per year."""
-
-    ANNUAL = 1
-    MONTHLY = 12
-    DAILY = 365
-
-
-_CENT = Decimal("0.01")
-
-
-def _quantize(value: float) -> Decimal:
-    # Precision note: fractional exponentiation is computed via float (Python's
-    # Decimal does not support non-integer powers). The result is rounded to the
-    # nearest cent using ROUND_HALF_UP at the point of return. Intermediate
-    # rounding is deliberately avoided; only the final output is rounded.
-    return Decimal(str(value)).quantize(_CENT, rounding=ROUND_HALF_UP)
+__all__ = [
+    "CompoundingFreq",
+    "future_value_compound",
+    "future_value_simple",
+    "present_value",
+]
 
 
 def future_value_simple(
