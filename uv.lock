@@ -1543,7 +1543,7 @@ dev = [
     { name = "pytest-cov", specifier = ">=6.0.0" },
     { name = "ruff", specifier = ">=0.9.0" },
 ]
-flows = [{ name = "prefect", specifier = ">=3.0.0" }]
+flows = [{ name = "prefect", specifier = ">=3.6.26" }]
 
 [[package]]
 name = "mypy"
@@ -2021,7 +2021,7 @@ wheels = [
 
 [[package]]
 name = "prefect"
-version = "3.6.23"
+version = "3.6.26"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -2040,6 +2040,7 @@ dependencies = [
     { name = "dateparser" },
     { name = "docker" },
     { name = "exceptiongroup" },
+    { name = "fakeredis" },
     { name = "fastapi" },
     { name = "fsspec" },
     { name = "graphviz" },
@@ -2081,9 +2082,9 @@ dependencies = [
     { name = "websockets" },
     { name = "whenever", marker = "python_full_version >= '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/35/20/6bdc5b412233d0657cd1192152c1c515b61633275f16c1f8a55e9b057048/prefect-3.6.23.tar.gz", hash = "sha256:23b7071e6dcdae68fe8e5b334097fc1833c4695207a41de2b23779e2aec76143", size = 11000627, upload-time = "2026-03-20T12:04:08.793Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/df/82/9911260b174f0e42d6abc825052d02d199e9b28c3ec91309191347f46811/prefect-3.6.26.tar.gz", hash = "sha256:192c7254823c4b65deae782de1082bf071da07d8f97326bf3ba1559eeafaf062", size = 11071348, upload-time = "2026-04-10T16:56:30.506Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7a/33/0c3b28ff7dcb6b0bde145d6057785584bc1622d39bc48ea5af486faf4329/prefect-3.6.23-py3-none-any.whl", hash = "sha256:9ff1d82f399ced433ac794b23fb7b9426cd27b9e6e3610a1cdf5c4facb8975a2", size = 11833004, upload-time = "2026-03-20T12:04:05.467Z" },
+    { url = "https://files.pythonhosted.org/packages/d1/1e/099dac0fd5ea0611f6375ee5b43f9a264bd18a48465938fd7f9f5a60ae44/prefect-3.6.26-py3-none-any.whl", hash = "sha256:df599bd04f136d7fe4634aaf7f4110e34386717935630a7ff086dfde21334dfa", size = 11978672, upload-time = "2026-04-10T16:56:28.036Z" },
 ]
 
 [[package]]
