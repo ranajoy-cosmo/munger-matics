@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from decimal import ROUND_HALF_UP, Decimal
 from enum import IntEnum
 
@@ -32,3 +33,43 @@ def _quantize(value: float) -> Decimal:
 def _quantize_rate(value: float) -> Decimal:
     """Round a float to 6 decimal places (rate precision, ROUND_HALF_UP)."""
     return Decimal(str(value)).quantize(_RATE_PRECISION, rounding=ROUND_HALF_UP)
+
+
+def _newton_solve(
+    f: Callable[[float], float],
+    df: Callable[[float], float],
+    guess: float,
+    tolerance: float,
+    max_iterations: int,
+) -> float:
+    """Find a root of f using Newton-Raphson iteration.
+
+    Args:
+        f: The function whose root we seek (e.g. NPV as a function of rate).
+        df: The derivative of f.
+        guess: Initial estimate.
+        tolerance: Convergence threshold on |f(x)|.
+        max_iterations: Maximum iterations before giving up.
+
+    Returns:
+        The value x where |f(x)| < tolerance.
+
+    Raises:
+        ValueError: If the solver does not converge.
+    """
+    x = guess
+    for _ in range(max_iterations):
+        fx = f(x)
+        if abs(fx) < tolerance:
+            return x
+        dfx = df(x)
+        if abs(dfx) < 1e-12:
+            raise ValueError(
+                "Solver encountered near-zero derivative; try a different guess"
+            )
+        x = x - fx / dfx
+
+    raise ValueError(
+        f"Solver did not converge after {max_iterations} iterations; "
+        f"try a different guess or increase max_iterations"
+    )

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+from collections.abc import Sequence
 from datetime import date
 from decimal import Decimal
 
-from munger_matics.finance._common import _quantize, _quantize_rate
+from munger_matics.finance._common import _newton_solve, _quantize, _quantize_rate
 
 __all__ = [
     "irr",
@@ -21,46 +21,6 @@ def _validate_sign_change(cashflows: Sequence[Decimal]) -> None:
         raise ValueError(
             "cashflows must contain at least one positive and one negative value"
         )
-
-
-def _newton_solve(
-    f: Callable[[float], float],
-    df: Callable[[float], float],
-    guess: float,
-    tolerance: float,
-    max_iterations: int,
-) -> float:
-    """Find a root of f using Newton-Raphson iteration.
-
-    Args:
-        f: The function whose root we seek (e.g. NPV as a function of rate).
-        df: The derivative of f.
-        guess: Initial estimate.
-        tolerance: Convergence threshold on |f(x)|.
-        max_iterations: Maximum iterations before giving up.
-
-    Returns:
-        The rate x where |f(x)| < tolerance.
-
-    Raises:
-        ValueError: If the solver does not converge.
-    """
-    x = guess
-    for _ in range(max_iterations):
-        fx = f(x)
-        if abs(fx) < tolerance:
-            return x
-        dfx = df(x)
-        if abs(dfx) < 1e-12:
-            raise ValueError(
-                "IRR solver encountered near-zero derivative; try a different guess"
-            )
-        x = x - fx / dfx
-
-    raise ValueError(
-        f"IRR did not converge after {max_iterations} iterations; "
-        f"try a different guess or increase max_iterations"
-    )
 
 
 def npv(rate: Decimal, cashflows: Sequence[Decimal]) -> Decimal:
