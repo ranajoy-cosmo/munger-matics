@@ -1,0 +1,2900 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal accounting, budgeting and financial planning application">
+      
+      
+      
+        <link rel="canonical" href="https://ranajoy-cosmo.github.io/munger-matics/design/finance-questions/">
+      
+      
+        <link rel="prev" href="../finance-library/">
+      
+      
+        <link rel="next" href="../data-model/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Financial Questions - Munger-Matics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#financial-questions-algorithm-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Munger-Matics" class="md-header__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Munger-Matics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Financial Questions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Munger-Matics" class="md-nav__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Munger-Matics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Financial Questions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Financial Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-day-to-day-cash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Day-to-day cash
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Debt
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Debt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-interest-will-this-loan-cost-over-its-lifetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much interest will this loan cost over its lifetime? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am-i-paying-down-principal-or-mostly-interest-at-a-given-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I paying down principal or mostly interest at a given point? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-i-pay-xmonth-extra-how-many-months-do-i-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I pay €X/month extra, how many months do I save? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#should-i-overpay-the-mortgage-or-invest-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Should I overpay the mortgage or invest the difference? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-save-by-consolidating-two-loans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What do I save by consolidating two loans? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-vs-variable-mortgage-which-costs-less-under-a-rate-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed vs variable mortgage — which costs less under a rate scenario? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-rates-rise-1-what-is-my-new-monthly-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If rates rise 1%, what is my new monthly payment? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-savings-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Savings goals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Savings goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#will-i-reach-my-target-before-a-deadline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Will I reach my target before a deadline? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-must-i-save-each-month-to-reach-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much must I save each month to reach a target? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-the-rate-drops-05-how-much-longer-will-it-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If the rate drops 0.5%, how much longer will it take? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-do-i-hit-40k-starting-from-10k-saving-300month" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When do I hit €40K starting from €10K, saving €300/month? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-rate-of-return-do-i-need-on-my-contributions-to-reach-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What rate of return do I need on my contributions to reach a target? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-net-worth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Net worth
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Net worth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#am-i-growing-my-net-worth-in-real-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I growing my net worth in real terms? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-portfolio-investing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Portfolio &amp; investing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Portfolio &amp; investing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-return-have-i-actually-made" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What return have I actually made? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-my-portfolio-keeping-pace-with-inflation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is my portfolio keeping pace with inflation? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am-i-beating-an-index-fund" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I beating an index fund? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-was-my-annualised-return-over-a-clean-period-no-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What was my annualised return over a clean period (no contributions)? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-retirement-long-term-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Retirement &amp; long-term planning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Retirement &amp; long-term planning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-do-i-need-saved-to-sustain-a-monthly-withdrawal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much do I need saved to sustain a monthly withdrawal? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-can-i-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When can I retire? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-500k-in-30-years-worth-in-todays-euros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is €500K in 30 years worth in today's euros? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retire-at-60-vs-65-what-is-the-real-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retire at 60 vs 65 — what is the real difference? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#six-months-unpaid-leave-what-does-it-cost-the-retirement-pot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Six months unpaid leave — what does it cost the retirement pot? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to-a-lower-paying-job-what-is-the-long-run-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move to a lower-paying job — what is the long-run cost? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-housing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Housing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Housing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#can-i-afford-this-mortgage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can I afford this mortgage? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buy-vs-rent-which-is-cheaper-over-n-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buy vs rent — which is cheaper over N years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-it-worth-overpaying-the-mortgage-in-the-first-5-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is it worth overpaying the mortgage in the first 5 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-break-even-if-i-must-sell-within-3-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my break-even if I must sell within 3 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-what-if-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. "What if" scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. &#34;What if&#34; scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-long-does-my-emergency-fund-last-simple-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How long does my emergency fund last? ✅ (simple case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tax-net-income" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tax &amp; net income
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Tax &amp; net income">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-gross-do-i-need-to-earn-to-take-home-a-target-net-salary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much gross do I need to earn to take home a target net salary? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-of-a-raise-actually-lands-in-my-pocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much of a raise actually lands in my pocket? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-emergency-fund-liquidity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Emergency fund &amp; liquidity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Emergency fund &amp; liquidity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-have-enough-liquid-reserves-to-cover-n-months-of-expenses-simple-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do I have enough liquid reserves to cover N months of expenses? 📊 + simple arithmetic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-i-lost-income-today-how-long-could-i-sustain-my-lifestyle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I lost income today, how long could I sustain my lifestyle? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debt-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Debt strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Debt strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-what-order-should-i-pay-off-multiple-debts-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In what order should I pay off multiple debts? 📊 + sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#at-what-rate-does-it-stop-making-sense-to-hold-savings-instead-of-paying-down-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        At what rate does it stop making sense to hold savings instead of paying down debt? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-investment-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Investment scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Investment scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-portfolios-break-even-inflation-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my portfolio's break-even inflation rate? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-would-a-20-drawdown-reduce-my-net-worth-and-how-long-to-recover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much would a 20% drawdown reduce my net worth, and how long to recover? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-lump-sum-today-is-equivalent-to-n-years-of-monthly-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What lump sum today is equivalent to N years of monthly contributions? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-large-purchases-lease-vs-buy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Large purchases — lease vs buy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Large purchases — lease vs buy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is-it-cheaper-to-lease-or-buy-a-car-over-n-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is it cheaper to lease or buy a car over N years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pay-cash-vs-finance-which-is-better-if-the-cash-could-be-invested" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pay cash vs finance — which is better if the cash could be invested? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-children-dependants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Children &amp; dependants
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Children &amp; dependants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-will-a-monthly-education-savings-plan-be-worth-at-age-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What will a monthly education savings plan be worth at age 18? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-lump-sum-do-i-need-today-to-fund-university-costs-in-18-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What lump sum do I need today to fund university costs in 18 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-retirement-extended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Retirement — extended
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Retirement — extended">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-financial-independence-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my "financial independence number"? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-does-delaying-contributions-by-5-years-affect-the-retirement-pot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How does delaying contributions by 5 years affect the retirement pot? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-does-retiring-2-years-earlier-change-what-i-need-to-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How does retiring 2 years earlier change what I need to save? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-projected-retirement-income-from-my-portfolio-state-pension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my projected retirement income from my portfolio + state pension? 📊 + 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gap-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-usage-heatmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function Usage Heatmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-day-to-day-cash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Day-to-day cash
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Debt
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Debt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-interest-will-this-loan-cost-over-its-lifetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much interest will this loan cost over its lifetime? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am-i-paying-down-principal-or-mostly-interest-at-a-given-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I paying down principal or mostly interest at a given point? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-i-pay-xmonth-extra-how-many-months-do-i-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I pay €X/month extra, how many months do I save? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#should-i-overpay-the-mortgage-or-invest-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Should I overpay the mortgage or invest the difference? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-save-by-consolidating-two-loans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What do I save by consolidating two loans? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-vs-variable-mortgage-which-costs-less-under-a-rate-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed vs variable mortgage — which costs less under a rate scenario? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-rates-rise-1-what-is-my-new-monthly-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If rates rise 1%, what is my new monthly payment? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-savings-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Savings goals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Savings goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#will-i-reach-my-target-before-a-deadline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Will I reach my target before a deadline? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-must-i-save-each-month-to-reach-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much must I save each month to reach a target? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-the-rate-drops-05-how-much-longer-will-it-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If the rate drops 0.5%, how much longer will it take? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-do-i-hit-40k-starting-from-10k-saving-300month" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When do I hit €40K starting from €10K, saving €300/month? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-rate-of-return-do-i-need-on-my-contributions-to-reach-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What rate of return do I need on my contributions to reach a target? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-net-worth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Net worth
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Net worth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#am-i-growing-my-net-worth-in-real-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I growing my net worth in real terms? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-portfolio-investing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Portfolio &amp; investing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Portfolio &amp; investing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-return-have-i-actually-made" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What return have I actually made? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-my-portfolio-keeping-pace-with-inflation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is my portfolio keeping pace with inflation? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am-i-beating-an-index-fund" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Am I beating an index fund? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-was-my-annualised-return-over-a-clean-period-no-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What was my annualised return over a clean period (no contributions)? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-retirement-long-term-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Retirement &amp; long-term planning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Retirement &amp; long-term planning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-do-i-need-saved-to-sustain-a-monthly-withdrawal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much do I need saved to sustain a monthly withdrawal? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-can-i-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When can I retire? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-500k-in-30-years-worth-in-todays-euros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is €500K in 30 years worth in today's euros? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retire-at-60-vs-65-what-is-the-real-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retire at 60 vs 65 — what is the real difference? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#six-months-unpaid-leave-what-does-it-cost-the-retirement-pot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Six months unpaid leave — what does it cost the retirement pot? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to-a-lower-paying-job-what-is-the-long-run-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move to a lower-paying job — what is the long-run cost? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-housing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Housing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Housing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#can-i-afford-this-mortgage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can I afford this mortgage? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buy-vs-rent-which-is-cheaper-over-n-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buy vs rent — which is cheaper over N years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-it-worth-overpaying-the-mortgage-in-the-first-5-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is it worth overpaying the mortgage in the first 5 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-break-even-if-i-must-sell-within-3-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my break-even if I must sell within 3 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-what-if-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. "What if" scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. &#34;What if&#34; scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-long-does-my-emergency-fund-last-simple-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How long does my emergency fund last? ✅ (simple case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tax-net-income" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tax &amp; net income
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Tax &amp; net income">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-much-gross-do-i-need-to-earn-to-take-home-a-target-net-salary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much gross do I need to earn to take home a target net salary? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-of-a-raise-actually-lands-in-my-pocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much of a raise actually lands in my pocket? ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-emergency-fund-liquidity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Emergency fund &amp; liquidity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Emergency fund &amp; liquidity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-have-enough-liquid-reserves-to-cover-n-months-of-expenses-simple-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do I have enough liquid reserves to cover N months of expenses? 📊 + simple arithmetic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-i-lost-income-today-how-long-could-i-sustain-my-lifestyle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I lost income today, how long could I sustain my lifestyle? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debt-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Debt strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Debt strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-what-order-should-i-pay-off-multiple-debts-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In what order should I pay off multiple debts? 📊 + sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#at-what-rate-does-it-stop-making-sense-to-hold-savings-instead-of-paying-down-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        At what rate does it stop making sense to hold savings instead of paying down debt? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-investment-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Investment scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Investment scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-portfolios-break-even-inflation-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my portfolio's break-even inflation rate? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-would-a-20-drawdown-reduce-my-net-worth-and-how-long-to-recover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much would a 20% drawdown reduce my net worth, and how long to recover? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-lump-sum-today-is-equivalent-to-n-years-of-monthly-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What lump sum today is equivalent to N years of monthly contributions? ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-large-purchases-lease-vs-buy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Large purchases — lease vs buy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Large purchases — lease vs buy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#is-it-cheaper-to-lease-or-buy-a-car-over-n-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is it cheaper to lease or buy a car over N years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pay-cash-vs-finance-which-is-better-if-the-cash-could-be-invested" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pay cash vs finance — which is better if the cash could be invested? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-children-dependants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Children &amp; dependants
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Children &amp; dependants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-will-a-monthly-education-savings-plan-be-worth-at-age-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What will a monthly education savings plan be worth at age 18? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-lump-sum-do-i-need-today-to-fund-university-costs-in-18-years" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What lump sum do I need today to fund university costs in 18 years? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-retirement-extended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Retirement — extended
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Retirement — extended">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-financial-independence-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my "financial independence number"? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-does-delaying-contributions-by-5-years-affect-the-retirement-pot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How does delaying contributions by 5 years affect the retirement pot? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-does-retiring-2-years-earlier-change-what-i-need-to-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How does retiring 2 years earlier change what I need to save? 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-my-projected-retirement-income-from-my-portfolio-state-pension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is my projected retirement income from my portfolio + state pension? 📊 + 🔗
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gap-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-usage-heatmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function Usage Heatmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="financial-questions-algorithm-map">Financial Questions — Algorithm Map</h1>
+<p>This document maps the financial questions a user of this application might ask to the
+library functions that answer them. It is the primary reference for prioritising missing
+functions and planning dashboard features.</p>
+<p><strong>Status key</strong></p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td>Single function call</td>
+</tr>
+<tr>
+<td>🔗</td>
+<td>Compose two or more existing functions</td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td>Gap — function missing from library</td>
+</tr>
+<tr>
+<td>📊</td>
+<td>Ledger/aggregation — answered by the data layer, not the finance library</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current public API</strong> (<code>from munger_matics.finance import …</code>)</p>
+<p><code>future_value_simple</code> · <code>future_value_compound</code> · <code>present_value</code> · <code>required_rate</code> ·
+<code>years_to_target</code> · <code>payment</code> · <code>pv_annuity</code> · <code>fv_annuity</code> · <code>periods_to_target</code> ·
+<code>annuity_required_rate</code> · <code>amortization_schedule</code> · <code>effective_annual_rate</code> ·
+<code>nominal_from_ear</code> · <code>real_rate</code> · <code>cagr</code> · <code>npv</code> · <code>irr</code> · <code>xirr</code> · <code>CompoundingFreq</code> ·
+<code>AmortizationRow</code></p>
+<hr />
+<h2 id="1-day-to-day-cash">1. Day-to-day cash</h2>
+<p>All of these are ledger aggregation questions. The finance library has no role.
+Answers come from grouping and summing transaction data.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Am I spending more than I earn this month?</td>
+<td>📊</td>
+<td><code>sum(amounts) by month</code></td>
+</tr>
+<tr>
+<td>Which category is over budget?</td>
+<td>📊</td>
+<td><code>actual vs budget by category</code></td>
+</tr>
+<tr>
+<td>Average monthly spend, this year vs last year</td>
+<td>📊</td>
+<td>Rolling 12-month aggregation</td>
+</tr>
+<tr>
+<td>What recurring charges am I paying?</td>
+<td>📊</td>
+<td>Pattern-match on <code>description</code></td>
+</tr>
+<tr>
+<td>Is this transaction a duplicate?</td>
+<td>📊</td>
+<td>Matched by <code>import_hash</code> at import time</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-debt">2. Debt</h2>
+<h3 id="how-much-interest-will-this-loan-cost-over-its-lifetime">How much interest will this loan cost over its lifetime? 🔗</h3>
+<div class="highlight"><pre><span></span><code>schedule = amortization_schedule(principal, annual_rate, years, freq)
+total_interest = sum(row.interest_payment for row in schedule)
+</code></pre></div>
+<p>Equivalent shortcut (no schedule needed):
+<div class="highlight"><pre><span></span><code>total_interest = payment(principal, annual_rate, years, freq) * n_periods - principal
+</code></pre></div></p>
+<hr />
+<h3 id="am-i-paying-down-principal-or-mostly-interest-at-a-given-point">Am I paying down principal or mostly interest at a given point? ✅</h3>
+<div class="highlight"><pre><span></span><code>schedule = amortization_schedule(principal, annual_rate, years, freq)
+row = schedule[current_period - 1]
+interest_fraction = row.interest_payment / row.payment
+</code></pre></div>
+<hr />
+<h3 id="if-i-pay-xmonth-extra-how-many-months-do-i-save">If I pay €X/month extra, how many months do I save? ⚠️</h3>
+<p>Requires <code>payoff_periods(principal, annual_rate, pmt, freq) -&gt; int</code>.</p>
+<p>Formula: $n = -\ln(1 - rP/PMT) / \ln(1+r)$ where $r$ is the periodic rate.</p>
+<div class="highlight"><pre><span></span><code># Once implemented:
+n_original = payoff_periods(principal, rate, payment(...), freq)
+n_overpay  = payoff_periods(principal, rate, payment(...) + overpayment, freq)
+months_saved = n_original - n_overpay
+</code></pre></div>
+<p>This function appears in <strong>three</strong> separate question chains (overpayment, consolidation,
+fixed vs variable) and is the highest-priority gap in the debt module.</p>
+<hr />
+<h3 id="should-i-overpay-the-mortgage-or-invest-the-difference">Should I overpay the mortgage or invest the difference? 🔗</h3>
+<div class="highlight"><pre><span></span><code># Interest saved by overpaying
+schedule_normal    = amortization_schedule(principal, mortgage_rate, years, freq)
+schedule_overpay   = amortization_schedule(principal, mortgage_rate, remaining_years_after_payoff, freq)
+# Note: requires payoff_periods ⚠️ to know when to stop
+
+# Opportunity cost of not investing
+investment_fv = fv_annuity(overpayment_amount, investment_rate, years, freq)
+
+# Decision: investment_fv &gt; interest_saved → invest wins
+</code></pre></div>
+<p><strong>Flag:</strong> this comparison must use after-tax rates on both sides.
+Mortgage interest relief and investment tax (e.g. PFU 30% in France) can flip the result.</p>
+<hr />
+<h3 id="what-do-i-save-by-consolidating-two-loans">What do I save by consolidating two loans? 🔗</h3>
+<div class="highlight"><pre><span></span><code>interest_1       = sum(row.interest_payment for row in amortization_schedule(p1, r1, y1, freq))
+interest_2       = sum(row.interest_payment for row in amortization_schedule(p2, r2, y2, freq))
+interest_merged  = sum(row.interest_payment for row in amortization_schedule(p1+p2, new_rate, new_years, freq))
+saving = (interest_1 + interest_2) - interest_merged
+</code></pre></div>
+<p><strong>Warning:</strong> a longer new term can reduce monthly payments while <em>increasing</em> total
+interest. Always surface both <code>monthly_saving</code> and <code>total_interest_saving</code> in the UI.</p>
+<hr />
+<h3 id="fixed-vs-variable-mortgage-which-costs-less-under-a-rate-scenario">Fixed vs variable mortgage — which costs less under a rate scenario? 🔗</h3>
+<p>Run the schedule in segments, one per rate period:</p>
+<div class="highlight"><pre><span></span><code># Phase 1: first 3 years at teaser rate
+s1 = amortization_schedule(principal, initial_rate, 3, MONTHLY)
+balance_after_p1 = s1[-1].remaining_balance
+
+# Phase 2: remaining 22 years at risen rate
+s2 = amortization_schedule(balance_after_p1, risen_rate, 22, MONTHLY)
+
+total_variable_cost = sum(r.payment for r in s1) + sum(r.payment for r in s2)
+total_fixed_cost    = sum(r.payment for r in amortization_schedule(principal, fixed_rate, 25, MONTHLY))
+</code></pre></div>
+<hr />
+<h3 id="if-rates-rise-1-what-is-my-new-monthly-payment">If rates rise 1%, what is my new monthly payment? ✅</h3>
+<div class="highlight"><pre><span></span><code>balance = amortization_schedule(principal, current_rate, years, MONTHLY)[current_period - 1].remaining_balance
+new_pmt = payment(balance, current_rate + Decimal(&quot;0.01&quot;), remaining_years, MONTHLY)
+increase = new_pmt - current_pmt
+</code></pre></div>
+<hr />
+<h2 id="3-savings-goals">3. Savings goals</h2>
+<h3 id="will-i-reach-my-target-before-a-deadline">Will I reach my target before a deadline? 🔗</h3>
+<p>Both the existing balance (compounding lump sum) and the ongoing contributions
+(annuity stream) must be included. Omitting the first term is a common modelling error.</p>
+<div class="highlight"><pre><span></span><code>fv_existing      = future_value_compound(current_balance, rate, years, freq)
+fv_contributions = fv_annuity(monthly_saving, rate, years, freq)
+fv_total         = fv_existing + fv_contributions
+reached          = fv_total &gt;= target
+</code></pre></div>
+<hr />
+<h3 id="how-much-must-i-save-each-month-to-reach-a-target">How much must I save each month to reach a target? ⚠️</h3>
+<p>Requires <code>sinking_fund_payment(target_fv, annual_rate, years, freq) -&gt; Decimal</code>.</p>
+<p>Formula: $PMT = FV \cdot \frac{r}{(1+r)^n - 1}$</p>
+<p>This is the most common personal planning question ("how much do I need to save?")
+and is the second-highest priority gap in the library.</p>
+<div class="highlight"><pre><span></span><code># Once implemented:
+monthly_saving = sinking_fund_payment(target_fv, rate, years, MONTHLY)
+</code></pre></div>
+<hr />
+<h3 id="if-the-rate-drops-05-how-much-longer-will-it-take">If the rate drops 0.5%, how much longer will it take? ✅</h3>
+<div class="highlight"><pre><span></span><code>n_now    = periods_to_target(target, pmt, rate, freq, initial_pv)
+n_lower  = periods_to_target(target, pmt, rate - Decimal(&quot;0.005&quot;), freq, initial_pv)
+extra    = n_lower - n_now   # extra periods
+</code></pre></div>
+<hr />
+<h3 id="when-do-i-hit-40k-starting-from-10k-saving-300month">When do I hit €40K starting from €10K, saving €300/month? ✅</h3>
+<div class="highlight"><pre><span></span><code>n = periods_to_target(
+    target_fv   = Decimal(&quot;40000&quot;),
+    pmt         = Decimal(&quot;300&quot;),
+    annual_rate = rate,
+    freq        = MONTHLY,
+    initial_pv  = Decimal(&quot;10000&quot;),
+)
+target_date = today + relativedelta(months=n)
+</code></pre></div>
+<hr />
+<h3 id="what-rate-of-return-do-i-need-on-my-contributions-to-reach-a-target">What rate of return do I need on my contributions to reach a target? ✅</h3>
+<div class="highlight"><pre><span></span><code>rate_needed = annuity_required_rate(
+    target_fv  = target,
+    pmt        = monthly_saving,
+    years      = years,
+    freq       = MONTHLY,
+    initial_pv = current_balance,
+)
+</code></pre></div>
+<hr />
+<h2 id="4-net-worth">4. Net worth</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is my net worth today?</td>
+<td>📊</td>
+<td>Sum of all account balances</td>
+</tr>
+<tr>
+<td>Net worth over time</td>
+<td>📊</td>
+<td>Monthly snapshot from ledger</td>
+</tr>
+<tr>
+<td>Liquid vs illiquid split</td>
+<td>📊</td>
+<td>Account-type aggregation</td>
+</tr>
+<tr>
+<td>Debt-to-asset ratio</td>
+<td>📊</td>
+<td><code>sum(liabilities) / sum(assets)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="am-i-growing-my-net-worth-in-real-terms">Am I growing my net worth in real terms? 🔗</h3>
+<div class="highlight"><pre><span></span><code>nominal_growth = cagr(net_worth_start, net_worth_end, years)
+real_growth    = real_rate(nominal_growth, avg_annual_inflation)
+# real_growth &gt; 0 → gaining purchasing power
+# real_growth &lt; 0 → losing purchasing power even if nominally growing
+</code></pre></div>
+<hr />
+<h2 id="5-portfolio-investing">5. Portfolio &amp; investing</h2>
+<h3 id="what-return-have-i-actually-made">What return have I actually made? ✅</h3>
+<p>XIRR is the only correct answer when contributions are irregular (which they always are).
+CAGR gives a wrong answer here because it ignores <em>when</em> money was deployed.</p>
+<div class="highlight"><pre><span></span><code># cashflows: each contribution is negative, current portfolio value is final positive
+xirr_result = xirr(cashflows, dates)
+</code></pre></div>
+<hr />
+<h3 id="is-my-portfolio-keeping-pace-with-inflation">Is my portfolio keeping pace with inflation? 🔗</h3>
+<div class="highlight"><pre><span></span><code>portfolio_return = xirr(cashflows, dates)
+real             = real_rate(portfolio_return, avg_annual_inflation)
+outpacing        = real &gt; Decimal(&quot;0&quot;)
+</code></pre></div>
+<hr />
+<h3 id="am-i-beating-an-index-fund">Am I beating an index fund? 🔗</h3>
+<p>The only fair comparison feeds the <em>same cash flows</em> into the index and measures what
+they would be worth.</p>
+<div class="highlight"><pre><span></span><code># Reconstruct what the index would have returned on identical investment dates/amounts
+index_xirr = xirr(index_equivalent_cashflows, my_dates)
+my_xirr    = xirr(my_cashflows, my_dates)
+outperforming = my_xirr &gt; index_xirr
+</code></pre></div>
+<hr />
+<h3 id="what-was-my-annualised-return-over-a-clean-period-no-contributions">What was my annualised return over a clean period (no contributions)? ✅</h3>
+<div class="highlight"><pre><span></span><code>annualised = cagr(value_at_start, value_at_end, years)
+</code></pre></div>
+<hr />
+<h2 id="6-retirement-long-term-planning">6. Retirement &amp; long-term planning</h2>
+<h3 id="how-much-do-i-need-saved-to-sustain-a-monthly-withdrawal">How much do I need saved to sustain a monthly withdrawal? ✅</h3>
+<div class="highlight"><pre><span></span><code>nest_egg = pv_annuity(monthly_withdrawal, return_in_retirement, years_in_retirement, MONTHLY)
+</code></pre></div>
+<hr />
+<h3 id="when-can-i-retire">When can I retire? 🔗</h3>
+<div class="highlight"><pre><span></span><code>nest_egg = pv_annuity(monthly_withdrawal, return_in_retirement, years_in_retirement, MONTHLY)
+months   = periods_to_target(nest_egg, monthly_contribution, expected_return, MONTHLY, current_savings)
+retirement_date = today + relativedelta(months=months)
+</code></pre></div>
+<hr />
+<h3 id="what-is-500k-in-30-years-worth-in-todays-euros">What is €500K in 30 years worth in today's euros? ✅</h3>
+<p><code>present_value</code> discounts any future sum back to today. Use inflation as the discount rate:</p>
+<div class="highlight"><pre><span></span><code>real_value = present_value(Decimal(&quot;500000&quot;), inflation_rate, 30, ANNUAL)
+</code></pre></div>
+<hr />
+<h3 id="retire-at-60-vs-65-what-is-the-real-difference">Retire at 60 vs 65 — what is the real difference? 🔗</h3>
+<div class="highlight"><pre><span></span><code># Nest egg needed at 60 (more years of retirement to fund)
+nest_egg_60 = pv_annuity(monthly_withdrawal, return_in_retirement, life_expectancy - 60, MONTHLY)
+
+# Nest egg needed at 65
+nest_egg_65 = pv_annuity(monthly_withdrawal, return_in_retirement, life_expectancy - 65, MONTHLY)
+
+# Extra 5 years of contributions if retiring at 65
+extra_pot = fv_annuity(monthly_contribution, expected_return, 5, MONTHLY)
+
+# Net gap: what you need at 60 minus what 5 extra years of saving adds
+net_gap = nest_egg_60 - (nest_egg_65 + extra_pot)
+</code></pre></div>
+<hr />
+<h3 id="six-months-unpaid-leave-what-does-it-cost-the-retirement-pot">Six months unpaid leave — what does it cost the retirement pot? 🔗</h3>
+<p>The true cost is the compounded future value of the missed contributions, not the
+face value of the missed payments.</p>
+<div class="highlight"><pre><span></span><code>missed_face_value = 6 * monthly_contribution
+years_to_retirement = ...
+cost_at_retirement = future_value_compound(missed_face_value, expected_return, years_to_retirement, MONTHLY)
+cost_in_today_euros = present_value(cost_at_retirement, inflation_rate, years_to_retirement, ANNUAL)
+</code></pre></div>
+<hr />
+<h3 id="move-to-a-lower-paying-job-what-is-the-long-run-cost">Move to a lower-paying job — what is the long-run cost? 🔗</h3>
+<div class="highlight"><pre><span></span><code>monthly_shortfall = old_salary - new_salary
+
+# Cost to retirement pot (compounded opportunity cost)
+pot_cost = fv_annuity(monthly_shortfall * savings_rate, expected_return, years_to_retirement, MONTHLY)
+
+# Cost in today&#39;s money (for human-readable framing)
+todays_cost = pv_annuity(monthly_shortfall, discount_rate, working_years_remaining, MONTHLY)
+</code></pre></div>
+<hr />
+<h2 id="7-housing">7. Housing</h2>
+<h3 id="can-i-afford-this-mortgage">Can I afford this mortgage? ✅</h3>
+<div class="highlight"><pre><span></span><code>monthly_pmt  = payment(purchase_price - deposit, mortgage_rate, years, MONTHLY)
+affordability = monthly_pmt / gross_monthly_income   # should be &lt;= 0.33
+</code></pre></div>
+<hr />
+<h3 id="buy-vs-rent-which-is-cheaper-over-n-years">Buy vs rent — which is cheaper over N years? 🔗</h3>
+<p><strong>Ownership cost (net)</strong>
+<div class="highlight"><pre><span></span><code>schedule        = amortization_schedule(principal, mortgage_rate, N, MONTHLY)
+total_paid      = sum(r.payment for r in schedule) + deposit + purchase_costs
+equity_at_exit  = projected_property_value - schedule[-1].remaining_balance
+net_cost_buy    = total_paid - equity_at_exit
+</code></pre></div></p>
+<p><strong>Renting cost (opportunity cost of deposit included)</strong>
+<div class="highlight"><pre><span></span><code>total_rent        = sum of monthly_rent * 12 across N years (with annual increases)
+deposit_invested  = future_value_compound(deposit, investment_rate, N, ANNUAL)
+opportunity_cost  = deposit_invested - deposit
+net_cost_rent     = total_rent + opportunity_cost
+</code></pre></div></p>
+<p><strong>Decision:</strong> <code>net_cost_buy</code> vs <code>net_cost_rent</code> — lower number wins.</p>
+<hr />
+<h3 id="is-it-worth-overpaying-the-mortgage-in-the-first-5-years">Is it worth overpaying the mortgage in the first 5 years? 🔗</h3>
+<p>Requires <code>payoff_periods</code> ⚠️. Same structure as the general overpayment question in §2.</p>
+<hr />
+<h3 id="what-is-my-break-even-if-i-must-sell-within-3-years">What is my break-even if I must sell within 3 years? 🔗</h3>
+<div class="highlight"><pre><span></span><code>schedule          = amortization_schedule(principal, rate, 25, MONTHLY)
+balance_at_sale   = schedule[35].remaining_balance   # 36th payment = 3 years
+total_paid_so_far = payment(...) * 36 + deposit + costs
+min_sale_price    = balance_at_sale + total_paid_so_far
+</code></pre></div>
+<hr />
+<h2 id="8-what-if-scenarios">8. "What if" scenarios</h2>
+<h3 id="how-long-does-my-emergency-fund-last-simple-case">How long does my emergency fund last? ✅ (simple case)</h3>
+<p>Zero-rate assumption (cash held):
+<div class="highlight"><pre><span></span><code>months = emergency_fund / avg_monthly_burn
+</code></pre></div></p>
+<p>If the fund is invested:
+<div class="highlight"><pre><span></span><code>months = periods_to_target(Decimal(&quot;0&quot;), avg_monthly_burn, fund_return, MONTHLY, initial_pv=emergency_fund)
+</code></pre></div></p>
+<hr />
+<h2 id="9-tax-net-income">9. Tax &amp; net income</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is my effective tax rate this year?</td>
+<td>📊</td>
+<td><code>total_tax_paid / gross_income</code> from ledger</td>
+</tr>
+<tr>
+<td>Am I using annual tax-free allowances?</td>
+<td>📊</td>
+<td>Compare ledger totals to configured thresholds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-much-gross-do-i-need-to-earn-to-take-home-a-target-net-salary">How much gross do I need to earn to take home a target net salary? ⚠️</h3>
+<p>Requires a <code>gross_from_net(net, tax_schedule) -&gt; Decimal</code> function (or a taxpayer model).
+Tax schedules are jurisdiction-specific and change annually — the function must accept a
+configurable bracket table rather than hard-coded rates.</p>
+<hr />
+<h3 id="how-much-of-a-raise-actually-lands-in-my-pocket">How much of a raise actually lands in my pocket? ⚠️</h3>
+<p>Same dependency as above. Given <code>old_gross</code> and <code>new_gross</code>, compute:</p>
+<div class="highlight"><pre><span></span><code># Once gross_from_net is available:
+net_increase = net(new_gross) - net(old_gross)
+effective_raise_rate = net_increase / old_net
+</code></pre></div>
+<hr />
+<h2 id="10-emergency-fund-liquidity">10. Emergency fund &amp; liquidity</h2>
+<h3 id="do-i-have-enough-liquid-reserves-to-cover-n-months-of-expenses-simple-arithmetic">Do I have enough liquid reserves to cover N months of expenses? 📊 + simple arithmetic</h3>
+<div class="highlight"><pre><span></span><code>monthly_burn = avg_monthly_spend_from_ledger
+coverage     = liquid_balance / monthly_burn
+sufficient   = coverage &gt;= target_months
+</code></pre></div>
+<hr />
+<h3 id="if-i-lost-income-today-how-long-could-i-sustain-my-lifestyle">If I lost income today, how long could I sustain my lifestyle? 🔗</h3>
+<p>Extends the emergency fund question. If the fund earns a return while being drawn down:</p>
+<div class="highlight"><pre><span></span><code>months = periods_to_target(
+    target_fv   = Decimal(&quot;0&quot;),
+    pmt         = avg_monthly_burn,
+    annual_rate = fund_return,
+    freq        = MONTHLY,
+    initial_pv  = liquid_balance,
+)
+</code></pre></div>
+<hr />
+<h2 id="11-debt-strategy">11. Debt strategy</h2>
+<h3 id="in-what-order-should-i-pay-off-multiple-debts-sorting">In what order should I pay off multiple debts? 📊 + sorting</h3>
+<p>Two strategies:</p>
+<ul>
+<li><strong>Avalanche</strong> (minimises interest): sort debts by <code>annual_rate</code> descending, direct surplus to highest-rate debt first.</li>
+<li><strong>Snowball</strong> (psychological wins): sort by <code>remaining_balance</code> ascending.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>debts_avalanche = sorted(debts, key=lambda d: d.annual_rate, reverse=True)
+debts_snowball  = sorted(debts, key=lambda d: d.remaining_balance)
+</code></pre></div>
+<p>For each ordering, compute total interest across all debts using <code>amortization_schedule</code>.</p>
+<hr />
+<h3 id="at-what-rate-does-it-stop-making-sense-to-hold-savings-instead-of-paying-down-debt">At what rate does it stop making sense to hold savings instead of paying down debt? ✅</h3>
+<p>Above this threshold, the guaranteed after-tax saving from debt repayment beats the
+expected investment return.</p>
+<div class="highlight"><pre><span></span><code>debt_rate       = annual_rate_on_debt
+investment_rate = expected_return_on_savings
+
+# If investment_rate_after_tax &lt; debt_rate → repay debt first
+crossover_reached = (investment_rate * (1 - marginal_tax_rate)) &lt; debt_rate
+</code></pre></div>
+<hr />
+<h2 id="12-investment-scenarios">12. Investment scenarios</h2>
+<h3 id="what-is-my-portfolios-break-even-inflation-rate">What is my portfolio's break-even inflation rate? 🔗</h3>
+<p>The inflation level that would completely erode my real return:</p>
+<div class="highlight"><pre><span></span><code>nominal_return     = xirr(cashflows, dates)
+# Solve real_rate(nominal_return, inf) = 0 for inf:
+# (1 + nominal) / (1 + inf) - 1 = 0  →  inf = nominal_return
+breakeven_inflation = nominal_return
+</code></pre></div>
+<p>The nominal XIRR <em>is</em> the break-even inflation rate — real return is zero when
+inflation equals the nominal return.</p>
+<hr />
+<h3 id="how-much-would-a-20-drawdown-reduce-my-net-worth-and-how-long-to-recover">How much would a 20% drawdown reduce my net worth, and how long to recover? 🔗</h3>
+<div class="highlight"><pre><span></span><code>drawdown_loss  = portfolio_value * Decimal(&quot;0.20&quot;)
+value_after    = portfolio_value - drawdown_loss
+
+# Years to recover back to original value at assumed return
+recovery_years = years_to_target(value_after, portfolio_value, assumed_return, ANNUAL)
+</code></pre></div>
+<hr />
+<h3 id="what-lump-sum-today-is-equivalent-to-n-years-of-monthly-contributions">What lump sum today is equivalent to N years of monthly contributions? ✅</h3>
+<div class="highlight"><pre><span></span><code>equivalent_lump_sum = pv_annuity(monthly_contribution, expected_return, years, MONTHLY)
+</code></pre></div>
+<hr />
+<h2 id="13-large-purchases-lease-vs-buy">13. Large purchases — lease vs buy</h2>
+<h3 id="is-it-cheaper-to-lease-or-buy-a-car-over-n-years">Is it cheaper to lease or buy a car over N years? 🔗</h3>
+<p><strong>Buy scenario (net cost)</strong>
+<div class="highlight"><pre><span></span><code># Finance the purchase
+monthly_loan_pmt = payment(purchase_price - deposit, loan_rate, loan_years, MONTHLY)
+total_loan_cost  = monthly_loan_pmt * (loan_years * 12) + deposit
+# Recover resale value at end of N years
+resale_pv        = present_value(resale_value, discount_rate, N, ANNUAL)
+net_cost_buy     = total_loan_cost - resale_pv
+</code></pre></div></p>
+<p><strong>Lease scenario</strong>
+<div class="highlight"><pre><span></span><code>total_lease_cost = monthly_lease * (N * 12) + upfront_fee
+# No residual value to recover
+</code></pre></div></p>
+<p><strong>Decision:</strong> <code>net_cost_buy</code> vs <code>total_lease_cost</code> — lower number wins (after adjusting
+for mileage limits, maintenance differences, etc.).</p>
+<hr />
+<h3 id="pay-cash-vs-finance-which-is-better-if-the-cash-could-be-invested">Pay cash vs finance — which is better if the cash could be invested? 🔗</h3>
+<div class="highlight"><pre><span></span><code># Option A: pay cash — opportunity cost of not investing
+opportunity_cost = future_value_compound(cash_price, investment_rate, N, ANNUAL) - cash_price
+
+# Option B: finance — interest paid to lender
+schedule         = amortization_schedule(cash_price, loan_rate, N, ANNUAL)
+interest_cost    = sum(r.interest_payment for r in schedule)
+
+# Pay cash if opportunity_cost &lt; interest_cost (i.e. investment return &lt; loan rate)
+</code></pre></div>
+<hr />
+<h2 id="14-children-dependants">14. Children &amp; dependants</h2>
+<h3 id="what-will-a-monthly-education-savings-plan-be-worth-at-age-18">What will a monthly education savings plan be worth at age 18? 🔗</h3>
+<div class="highlight"><pre><span></span><code>years_to_university = 18 - child_current_age
+
+# Existing balance grows as lump sum
+fv_existing      = future_value_compound(current_education_savings, return_rate, years_to_university, MONTHLY)
+
+# New contributions grow as annuity
+fv_contributions = fv_annuity(monthly_education_contribution, return_rate, years_to_university, MONTHLY)
+
+projected = fv_existing + fv_contributions
+</code></pre></div>
+<hr />
+<h3 id="what-lump-sum-do-i-need-today-to-fund-university-costs-in-18-years">What lump sum do I need today to fund university costs in 18 years? 🔗</h3>
+<p>University costs inflate faster than general CPI — use a separate education inflation rate.</p>
+<div class="highlight"><pre><span></span><code># Step 1: inflate today&#39;s university cost to arrival date
+future_cost = future_value_compound(todays_annual_cost * years_at_uni, education_inflation, years_to_go, ANNUAL)
+
+# Step 2: discount back to today at investment return
+lump_sum_needed = present_value(future_cost, investment_return, years_to_go, ANNUAL)
+</code></pre></div>
+<hr />
+<h2 id="15-retirement-extended">15. Retirement — extended</h2>
+<h3 id="what-is-my-financial-independence-number">What is my "financial independence number"? 🔗</h3>
+<p>The portfolio size at which investment returns alone cover annual expenses (25× rule /
+configurable safe withdrawal rate):</p>
+<div class="highlight"><pre><span></span><code>annual_expenses   = monthly_expenses * 12
+swr               = Decimal(&quot;0.04&quot;)          # 4% safe withdrawal rate
+fi_number         = annual_expenses / swr
+
+# Equivalently, PV of a perpetuity:
+# fi_number ≈ pv_annuity(monthly_expenses, swr, very_large_n, MONTHLY)
+</code></pre></div>
+<hr />
+<h3 id="how-does-delaying-contributions-by-5-years-affect-the-retirement-pot">How does delaying contributions by 5 years affect the retirement pot? 🔗</h3>
+<div class="highlight"><pre><span></span><code># Pot if starting today
+pot_now   = fv_annuity(monthly_contribution, expected_return, years_to_retirement, MONTHLY)
+
+# Pot if starting 5 years late
+pot_late  = fv_annuity(monthly_contribution, expected_return, years_to_retirement - 5, MONTHLY)
+
+cost_of_delay         = pot_now - pot_late
+cost_in_todays_money  = present_value(cost_of_delay, inflation_rate, years_to_retirement, ANNUAL)
+</code></pre></div>
+<hr />
+<h3 id="how-does-retiring-2-years-earlier-change-what-i-need-to-save">How does retiring 2 years earlier change what I need to save? 🔗</h3>
+<p>Two effects compound: a larger nest egg is required (longer drawdown) <em>and</em> there are
+fewer years to accumulate it.</p>
+<div class="highlight"><pre><span></span><code># Nest egg needed if retiring 2 years earlier
+nest_egg_early = pv_annuity(monthly_drawdown, return_in_retirement, life_expectancy - (target_age - 2), MONTHLY)
+
+# Projected portfolio with 2 fewer accumulation years
+projected_early = fv_annuity(monthly_contribution, expected_return, years_to_retirement - 2, MONTHLY) \
+                + future_value_compound(current_savings, expected_return, years_to_retirement - 2, MONTHLY)
+
+gap = nest_egg_early - projected_early
+</code></pre></div>
+<hr />
+<h3 id="what-is-my-projected-retirement-income-from-my-portfolio-state-pension">What is my projected retirement income from my portfolio + state pension? 📊 + 🔗</h3>
+<div class="highlight"><pre><span></span><code># Monthly drawdown the nest egg can sustain
+monthly_portfolio_income = payment(projected_nest_egg, return_in_retirement, drawdown_years, MONTHLY)
+
+state_pension_monthly = configured_value   # from config/
+
+total_monthly_income = monthly_portfolio_income + state_pension_monthly
+</code></pre></div>
+<hr />
+<h2 id="gap-summary">Gap Summary</h2>
+<p>The following functions are missing from the library.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Formula</th>
+<th>Priority</th>
+<th>Used in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>payoff_periods(principal, annual_rate, pmt, freq)</code></td>
+<td>$n = -\ln(1 - rP/PMT) / \ln(1+r)$</td>
+<td><strong>High</strong></td>
+<td>Overpayment, consolidation, fixed vs variable, buy vs rent</td>
+</tr>
+<tr>
+<td><code>sinking_fund_payment(target_fv, annual_rate, years, freq)</code></td>
+<td>$PMT = FV \cdot r / [(1+r)^n - 1]$</td>
+<td><strong>High</strong></td>
+<td>Savings planner — most common personal planning question</td>
+</tr>
+<tr>
+<td><code>gross_from_net(net, tax_schedule)</code></td>
+<td>jurisdiction-specific bracket table</td>
+<td><strong>Medium</strong></td>
+<td>Net salary target, raise impact</td>
+</tr>
+</tbody>
+</table>
+<p>Everything else can be answered by composing the existing public API.</p>
+<hr />
+<h2 id="function-usage-heatmap">Function Usage Heatmap</h2>
+<p>Functions that appear in the most question chains, in order (updated for §§9–15):</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Function</th>
+<th>Chains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>future_value_compound</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>fv_annuity</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>pv_annuity</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>amortization_schedule</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>present_value</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>payment</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>periods_to_target</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>xirr</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>real_rate</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>cagr</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>years_to_target</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>annuity_required_rate</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>future_value_simple</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>irr</code></td>
+<td>0 (subsumed by <code>xirr</code>)</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>effective_annual_rate</code></td>
+<td>0 (rate normalisation, pre-processing)</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>nominal_from_ear</code></td>
+<td>0 (rate normalisation, pre-processing)</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>required_rate</code></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><code>future_value_simple</code>, <code>irr</code>, <code>effective_annual_rate</code>, <code>nominal_from_ear</code>, and
+<code>required_rate</code> are correct and well-tested but do not appear directly in user-facing
+question chains. They are either pre-processing steps (rate normalisation) or edge-case
+tools. They should stay in the library for completeness but are low priority for
+dashboard exposure.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

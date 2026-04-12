@@ -1,0 +1,2015 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal accounting, budgeting and financial planning application">
+      
+      
+      
+        <link rel="canonical" href="https://ranajoy-cosmo.github.io/munger-matics/design/finance-library/">
+      
+      
+        <link rel="prev" href="../roadmap/">
+      
+      
+        <link rel="next" href="../finance-questions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Finance Library - Munger-Matics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finance-math-library" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Munger-Matics" class="md-header__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Munger-Matics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Finance Library
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Munger-Matics" class="md-nav__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Munger-Matics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance Library
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compoundingfreq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CompoundingFreq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-compounding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: compounding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: compounding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#future_value_simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        future_value_simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future_value_compound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        future_value_compound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#present_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        present_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        required_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#years_to_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        years_to_target
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-annuities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: annuities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: annuities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        payment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pv_annuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pv_annuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fv_annuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fv_annuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#periods_to_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        periods_to_target
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annuity_required_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        annuity_required_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amortization_schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        amortization_schedule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-rates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: rates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: rates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effective_annual_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        effective_annual_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nominal_from_ear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nominal_from_ear
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        real_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cagr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cagr
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-cashflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: cashflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: cashflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#npv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        npv
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        irr
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xirr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xirr
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precision-model-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precision Model Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirmed-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmed Gaps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Confirmed Gaps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payoff_periods-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        payoff_periods — high priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinking_fund_payment-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sinking_fund_payment — high priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Financial Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compoundingfreq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CompoundingFreq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-compounding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: compounding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: compounding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#future_value_simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        future_value_simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future_value_compound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        future_value_compound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#present_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        present_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        required_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#years_to_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        years_to_target
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-annuities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: annuities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: annuities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        payment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pv_annuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pv_annuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fv_annuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fv_annuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#periods_to_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        periods_to_target
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annuity_required_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        annuity_required_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amortization_schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        amortization_schedule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-rates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: rates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: rates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effective_annual_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        effective_annual_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nominal_from_ear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nominal_from_ear
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        real_rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cagr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cagr
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-cashflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module: cashflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module: cashflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#npv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        npv
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        irr
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xirr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xirr
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precision-model-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precision Model Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confirmed-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmed Gaps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Confirmed Gaps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payoff_periods-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        payoff_periods — high priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sinking_fund_payment-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sinking_fund_payment — high priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="finance-math-library">Finance Math Library</h1>
+<p><code>munger_matics.finance</code> is the quantitative core of Munger-Matics. It is a library of pure
+functions for time-value-of-money calculations, interest rate conversion, loan amortization,
+cash flow analysis, and portfolio return measurement.</p>
+<p>All planning and projection features in the dashboard consume these functions. They are
+implementation-agnostic: they take numbers in and return numbers out, with no database calls,
+no Streamlit imports, and no side effects.</p>
+<hr />
+<h2 id="design-principles">Design Principles</h2>
+<p><strong>Pure functions, no classes.</strong> Every function is a standalone computation. Inputs go in,
+a result comes out. No hidden state, no object lifecycle. This makes every function trivially
+testable and composable.</p>
+<p><strong><code>decimal.Decimal</code> for all monetary values.</strong> Floating-point arithmetic is never used for
+money. All monetary inputs and outputs are <code>Decimal</code>. Rates are also <code>Decimal</code> on input/output.</p>
+<p><strong>Float only for exponentiation, immediately quantized.</strong> Python's <code>Decimal</code> does not support
+fractional exponents. The precision strategy is: convert to <code>float</code> for the exponent computation,
+then immediately convert back via <code>Decimal(str(result))</code> and <code>quantize()</code> before returning.
+Intermediate rounding is avoided — only the final output is rounded. This assumption is
+commented in <code>_common.py</code>.</p>
+<p><strong>Two rounding precisions.</strong> Monetary outputs round to the nearest cent (2 decimal places,
+<code>ROUND_HALF_UP</code>). Rate outputs round to 6 decimal places (e.g. <code>0.051162</code> for 5.1162%),
+giving enough precision for meaningful rate comparisons.</p>
+<p><strong>Rates as decimal fractions.</strong> Rates are always passed as fractions: <code>0.05</code> means 5%.
+Never <code>5.0</code>. No runtime guard is applied (a threshold-based guard would produce false errors
+for high-rate scenarios). The convention is enforced by docstrings.</p>
+<p><strong>Compounding frequency as <code>CompoundingFreq</code>.</strong> An <code>IntEnum</code> whose integer value is
+the number of compounding periods per year. This prevents <code>"monthly"</code> vs <code>"MONTHLY"</code> string
+bugs and makes the math readable: <code>rate / freq.value</code>.</p>
+<hr />
+<h2 id="module-structure">Module Structure</h2>
+<div class="highlight"><pre><span></span><code>src/munger_matics/finance/
+    __init__.py      # public API — imports and re-exports everything
+    _common.py       # private utilities: CompoundingFreq, _quantize, _quantize_rate, _newton_solve
+    compounding.py   # lump-sum TVM: FV, PV, required rate, time to target
+    annuities.py     # regular payments: loans, savings streams, amortization
+    rates.py         # rate conversion: EAR, nominal, real rate, CAGR
+    cashflows.py     # irregular cash flows: NPV, IRR, XIRR
+</code></pre></div>
+<p>The dependency order is strict:</p>
+<div class="highlight"><pre><span></span><code>_common.py            ← no internal dependencies
+    ↓
+compounding.py        ← imports _common
+annuities.py          ← imports _common
+rates.py              ← imports _common
+cashflows.py          ← imports _common
+</code></pre></div>
+<p>No module imports from another module at the same level. All public names are re-exported
+through <code>__init__.py</code>.</p>
+<hr />
+<h2 id="compoundingfreq"><code>CompoundingFreq</code></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">munger_matics.finance</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompoundingFreq</span>
+</code></pre></div>
+<p>An <code>IntEnum</code> representing the number of compounding or payment periods per year.</p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ANNUAL</code></td>
+<td>1</td>
+<td>Annual savings, bonds, year-on-year comparisons</td>
+</tr>
+<tr>
+<td><code>SEMI_ANNUAL</code></td>
+<td>2</td>
+<td>Bond coupon payments</td>
+</tr>
+<tr>
+<td><code>QUARTERLY</code></td>
+<td>4</td>
+<td>Some structured products, PEL interest</td>
+</tr>
+<tr>
+<td><code>MONTHLY</code></td>
+<td>12</td>
+<td>Mortgages, regular savings, most personal finance</td>
+</tr>
+<tr>
+<td><code>DAILY</code></td>
+<td>365</td>
+<td>Livret A, overnight rates</td>
+</tr>
+</tbody>
+</table>
+<p>All functions that accept a <code>CompoundingFreq</code> default to <code>CompoundingFreq.ANNUAL</code>.</p>
+<hr />
+<h2 id="module-compounding">Module: <code>compounding</code></h2>
+<p>Lump-sum time-value-of-money functions. These answer questions about a single amount
+growing or shrinking over time.</p>
+<hr />
+<h3 id="future_value_simple"><code>future_value_simple</code></h3>
+<p>$$FV = PV \cdot (1 + r \cdot n)$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">future_value_simple</span><span class="p">(</span><span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">periods</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Future value under simple (non-compounding) interest. Used for short-term instruments
+and as a conceptual baseline. Less common in practice than compound interest.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pv</code></td>
+<td><code>Decimal</code></td>
+<td>Present value. Must be ≥ 0.</td>
+</tr>
+<tr>
+<td><code>rate</code></td>
+<td><code>Decimal</code></td>
+<td>Periodic interest rate. Must be ≥ 0.</td>
+</tr>
+<tr>
+<td><code>periods</code></td>
+<td><code>int</code></td>
+<td>Number of periods.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> Future value rounded to the nearest cent.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># €1,000 at 5% simple interest for 3 years</span>
+<span class="n">future_value_simple</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;1150.00&quot;)</span>
+<span class="c1"># Calculation: 1000 × (1 + 0.05 × 3) = 1000 × 1.15</span>
+</code></pre></div></p>
+<hr />
+<h3 id="future_value_compound"><code>future_value_compound</code></h3>
+<p>$$FV = PV \cdot \left(1 + \frac{r}{m}\right)^{m \cdot t}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">future_value_compound</span><span class="p">(</span>
+    <span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Future value under compound interest. The standard model for savings accounts,
+investments, and debt.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pv</code></td>
+<td><code>Decimal</code></td>
+<td>Present value. Must be ≥ 0.</td>
+</tr>
+<tr>
+<td><code>annual_rate</code></td>
+<td><code>Decimal</code></td>
+<td>Annual interest rate. Must be ≥ 0.</td>
+</tr>
+<tr>
+<td><code>years</code></td>
+<td><code>int \| float</code></td>
+<td>Investment horizon. May be fractional.</td>
+</tr>
+<tr>
+<td><code>freq</code></td>
+<td><code>CompoundingFreq</code></td>
+<td>Compounding periods per year. Default: <code>ANNUAL</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> Future value rounded to the nearest cent.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># €1,000 at 5% compounded monthly for 1 year</span>
+<span class="n">future_value_compound</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;1051.16&quot;)</span>
+<span class="c1"># Calculation: 1000 × (1 + 0.05/12)^12 ≈ 1051.1619</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Projecting Livret A or PEA balance growth. First component of
+"will I reach my savings target?" (combine with <code>fv_annuity</code> for regular contributions).</p>
+<hr />
+<h3 id="present_value"><code>present_value</code></h3>
+<p>$$PV = \frac{FV}{\left(1 + \frac{r}{m}\right)^{m \cdot t}}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">present_value</span><span class="p">(</span>
+    <span class="n">fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>The exact inverse of <code>future_value_compound</code>. Discounts a future amount back to its
+worth in today's money.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># What is €500,000 in 30 years worth in today&#39;s euros at 2.5% inflation?</span>
+<span class="n">present_value</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;500000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.025&quot;</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;237984.87&quot;)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Inflation-adjusting any projected future value to today's purchasing power.
+Pass <code>inflation_rate</code> as the <code>annual_rate</code> argument.</p>
+<hr />
+<h3 id="required_rate"><code>required_rate</code></h3>
+<p>$$r = m \cdot \left[\left(\frac{FV}{PV}\right)^{\frac{1}{m \cdot t}} - 1\right]$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">required_rate</span><span class="p">(</span>
+    <span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Annual rate needed for a lump sum to grow from <code>pv</code> to <code>fv</code> in the given time.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># What annual return do I need to turn €50K into €100K in 10 years?</span>
+<span class="n">required_rate</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;50000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;100000&quot;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;0.071773&quot;)   (7.18%)</span>
+</code></pre></div></p>
+<hr />
+<h3 id="years_to_target"><code>years_to_target</code></h3>
+<p>$$t = \frac{\ln(FV / PV)}{m \cdot \ln(1 + r/m)}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">years_to_target</span><span class="p">(</span>
+    <span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>
+</code></pre></div>
+<p>Time in years for a lump sum to grow from <code>pv</code> to <code>fv</code> at a given rate.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># How long until €10K doubles at 5% compounded monthly?</span>
+<span class="n">years_to_target</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;10000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;20000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → 13.89  (years)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="module-annuities">Module: <code>annuities</code></h2>
+<p>Functions for regular, equal periodic payments — either accumulating (savings) or
+decumulating (loan repayment). Also contains the amortization schedule generator.</p>
+<hr />
+<h3 id="payment"><code>payment</code></h3>
+<p>$$PMT = PV \cdot \frac{r(1+r)^n}{(1+r)^n - 1}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">payment</span><span class="p">(</span>
+    <span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Periodic payment for a fixed-rate loan. Where $r$ = <code>annual_rate / freq</code> and
+$n$ = <code>years × freq</code>.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Monthly payment on a €300,000 mortgage at 3.5% over 25 years</span>
+<span class="n">payment</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;300000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.035&quot;</span><span class="p">),</span> <span class="mi">25</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;1502.53&quot;)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Mortgage affordability check. Combine with income data to compute
+debt-to-income ratio.</p>
+<hr />
+<h3 id="pv_annuity"><code>pv_annuity</code></h3>
+<p>$$PVA = PMT \cdot \frac{1 - (1+r)^{-n}}{r}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">pv_annuity</span><span class="p">(</span>
+    <span class="n">pmt</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Present value of an ordinary annuity — the lump sum needed today to sustain <code>pmt</code>
+per period for <code>years</code> years.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># How much do I need saved to withdraw €2,000/month for 25 years at 4%?</span>
+<span class="n">pv_annuity</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;2000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.04&quot;</span><span class="p">),</span> <span class="mi">25</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;379417.85&quot;)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Retirement nest egg calculator. "How much do I need at retirement
+to sustain my target monthly income?"</p>
+<hr />
+<h3 id="fv_annuity"><code>fv_annuity</code></h3>
+<p>$$FVA = PMT \cdot \frac{(1+r)^n - 1}{r}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">fv_annuity</span><span class="p">(</span>
+    <span class="n">pmt</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Future value of an ordinary annuity — what a stream of regular equal contributions
+will be worth at the end of <code>years</code>.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Saving €500/month at 6% for 30 years</span>
+<span class="n">fv_annuity</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;500&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.06&quot;</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;502257.52&quot;)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Savings projections. Second component of "will I reach my target?"
+— combine with <code>future_value_compound(current_balance, ...)</code> for the lump-sum component.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Correct two-component projection (do not omit either term)</span>
+<span class="n">fv_existing</span>      <span class="o">=</span> <span class="n">future_value_compound</span><span class="p">(</span><span class="n">current_balance</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">MONTHLY</span><span class="p">)</span>
+<span class="n">fv_contributions</span> <span class="o">=</span> <span class="n">fv_annuity</span><span class="p">(</span><span class="n">monthly_saving</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">MONTHLY</span><span class="p">)</span>
+<span class="n">fv_total</span>         <span class="o">=</span> <span class="n">fv_existing</span> <span class="o">+</span> <span class="n">fv_contributions</span>
+</code></pre></div>
+<hr />
+<h3 id="periods_to_target"><code>periods_to_target</code></h3>
+<p>$$n = \frac{\ln!\left(\frac{target + PMT/r}{PV + PMT/r}\right)}{\ln(1+r)}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">periods_to_target</span><span class="p">(</span>
+    <span class="n">target_fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">pmt</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+    <span class="n">initial_pv</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</code></pre></div>
+<p>Number of whole periods needed to reach a savings target, given an existing balance
+and regular contributions. Returns a ceiling integer (the first period where the
+target is met or exceeded).</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># €10K saved, adding €500/month at 5% — how many months until €50K?</span>
+<span class="n">periods_to_target</span><span class="p">(</span>
+    <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;50000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;500&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span>
+    <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;10000&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># → 61  (months)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> "When do I reach my goal?" Combine with <code>date.today()</code> and
+<code>relativedelta(months=n)</code> to get a target date.</p>
+<hr />
+<h3 id="annuity_required_rate"><code>annuity_required_rate</code></h3>
+<p>Solves $PV(1+r)^n + PMT \cdot \frac{(1+r)^n - 1}{r} = target$ numerically for
+the nominal annual rate.</p>
+<div class="highlight"><pre><span></span><code><span class="n">annuity_required_rate</span><span class="p">(</span>
+    <span class="n">target_fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">pmt</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+    <span class="n">initial_pv</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span>
+    <span class="n">guess</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span>
+    <span class="n">tolerance</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.000001&quot;</span><span class="p">),</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>What annual return must my savings earn to reach a target, given a fixed contribution
+and horizon? No closed-form solution — uses Newton-Raphson via <code>_newton_solve</code>.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># I have €10K, save €500/month, want €100K in 10 years — what return do I need?</span>
+<span class="n">annuity_required_rate</span><span class="p">(</span>
+    <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;100000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;500&quot;</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;10000&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># → Decimal(&quot;0.041234&quot;)   (4.12%)</span>
+</code></pre></div></p>
+<hr />
+<h3 id="amortization_schedule"><code>amortization_schedule</code></h3>
+<div class="highlight"><pre><span></span><code><span class="n">amortization_schedule</span><span class="p">(</span>
+    <span class="n">principal</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AmortizationRow</span><span class="p">]</span>
+</code></pre></div>
+<p>Generates a period-by-period loan repayment schedule. Returns a <code>list[AmortizationRow]</code>
+where each row is an immutable Pydantic model.</p>
+<p><strong><code>AmortizationRow</code> fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>period</code></td>
+<td><code>int</code></td>
+<td>Payment number (1-indexed)</td>
+</tr>
+<tr>
+<td><code>payment</code></td>
+<td><code>Decimal</code></td>
+<td>Total payment this period</td>
+</tr>
+<tr>
+<td><code>principal_payment</code></td>
+<td><code>Decimal</code></td>
+<td>Portion reducing the balance</td>
+</tr>
+<tr>
+<td><code>interest_payment</code></td>
+<td><code>Decimal</code></td>
+<td>Portion going to interest</td>
+</tr>
+<tr>
+<td><code>remaining_balance</code></td>
+<td><code>Decimal</code></td>
+<td>Balance after this payment</td>
+</tr>
+</tbody>
+</table>
+<p>The final period is adjusted so the balance reaches exactly <code>Decimal("0.00")</code>,
+handling cumulative rounding drift.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">schedule</span> <span class="o">=</span> <span class="n">amortization_schedule</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;200000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.06&quot;</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="n">total_interest</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">interest_payment</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">schedule</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;231676.38&quot;)</span>
+</code></pre></div></p>
+<p><strong>For dashboard display</strong>, convert to Polars:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">schedule</span><span class="p">])</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Most load-bearing function in the library — appears in 6 distinct
+question chains: total interest cost, interest vs principal breakdown at any point,
+overpayment analysis, loan consolidation comparison, fixed vs variable scenario,
+and buy vs rent modelling.</p>
+<hr />
+<h2 id="module-rates">Module: <code>rates</code></h2>
+<p>Functions for converting between rate representations and computing growth rates.</p>
+<hr />
+<h3 id="effective_annual_rate"><code>effective_annual_rate</code></h3>
+<p>$$EAR = \left(1 + \frac{r_{nom}}{m}\right)^m - 1$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">effective_annual_rate</span><span class="p">(</span>
+    <span class="n">nominal_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Converts a nominal (stated) annual rate to an effective annual rate. A 5% nominal
+rate compounded monthly is actually 5.1162% EAR — converting to EAR puts all rates
+on a common basis for comparison.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">effective_annual_rate</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.05&quot;</span><span class="p">),</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;0.051162&quot;)</span>
+</code></pre></div></p>
+<hr />
+<h3 id="nominal_from_ear"><code>nominal_from_ear</code></h3>
+<p>$$r_{nom} = m \cdot \left[(1 + EAR)^{1/m} - 1\right]$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">nominal_from_ear</span><span class="p">(</span><span class="n">ear</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">ANNUAL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Inverse of <code>effective_annual_rate</code>. Useful when a broker quotes an EAR and you need
+the equivalent monthly rate to pass to <code>payment()</code> or <code>fv_annuity()</code>.</p>
+<hr />
+<h3 id="real_rate"><code>real_rate</code></h3>
+<p>$$r_{real} = \frac{1 + r_{nom}}{1 + \pi} - 1$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">real_rate</span><span class="p">(</span><span class="n">nominal_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">inflation_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Fisher equation. Converts a nominal return to its real (inflation-adjusted) equivalent.
+A 7% nominal return with 2.5% inflation gives 4.39% real growth.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">real_rate</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.07&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.025&quot;</span><span class="p">))</span>
+<span class="c1"># → Decimal(&quot;0.043902&quot;)</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> "Is my portfolio keeping pace with inflation?" Take <code>xirr(...)</code> result,
+pass to <code>real_rate(...)</code> with the average annual inflation over the period.</p>
+<hr />
+<h3 id="cagr"><code>cagr</code></h3>
+<p>$$CAGR = \left(\frac{FV}{PV}\right)^{1/t} - 1$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">cagr</span><span class="p">(</span><span class="n">pv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Compound Annual Growth Rate — normalises any multi-year change in value to a single
+comparable annual rate. Use when there are no irregular cash flows (a clean start
+and end value). Use <code>xirr</code> instead when contributions were made at irregular intervals.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Portfolio went from €10K to €18K in 5 years</span>
+<span class="n">cagr</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;10000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;18000&quot;</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1"># → Decimal(&quot;0.124734&quot;)   (12.47%)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="module-cashflows">Module: <code>cashflows</code></h2>
+<p>Functions for irregular cash flow series — sequences of payments at arbitrary amounts
+and (for XIRR) arbitrary dates.</p>
+<hr />
+<h3 id="npv"><code>npv</code></h3>
+<p>$$NPV = \sum_{t=0}^{n} \frac{C_t}{(1+r)^t}$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">npv</span><span class="p">(</span><span class="n">rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">cashflows</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Decimal</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Net Present Value of a series of equally-spaced cash flows. The first cash flow
+(<code>t=0</code>) is not discounted. Use a negative value for an initial investment and positive
+values for returns.</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Invest €1,000 today, receive €300, €420, €680 over 3 years at 10%</span>
+<span class="n">npv</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.10&quot;</span><span class="p">),</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;300&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;420&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;680&quot;</span><span class="p">)])</span>
+<span class="c1"># → Decimal(&quot;130.73&quot;)</span>
+<span class="c1"># Positive NPV: this investment creates value at a 10% hurdle rate.</span>
+</code></pre></div></p>
+<p><strong>Dashboard use:</strong> Evaluating invest-vs-overpay-mortgage decisions. Feed both options
+as cash flow sequences and compare NPVs at your personal hurdle rate.</p>
+<hr />
+<h3 id="irr"><code>irr</code></h3>
+<p>Finds the rate $r$ where $NPV(r, cashflows) = 0$ using Newton-Raphson.</p>
+<div class="highlight"><pre><span></span><code><span class="n">irr</span><span class="p">(</span>
+    <span class="n">cashflows</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Decimal</span><span class="p">],</span>
+    <span class="n">guess</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.10&quot;</span><span class="p">),</span>
+    <span class="n">tolerance</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.000001&quot;</span><span class="p">),</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Internal Rate of Return for equally-spaced cash flows. Requires at least one
+sign change (at least one positive and one negative cash flow).</p>
+<p><strong>Note:</strong> For real investment data with irregular contribution dates, prefer <code>xirr</code>.</p>
+<hr />
+<h3 id="xirr"><code>xirr</code></h3>
+<p>$$\sum_{i} \frac{C_i}{(1 + XIRR)^{d_i / 365}} = 0$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">xirr</span><span class="p">(</span>
+    <span class="n">cashflows</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Decimal</span><span class="p">],</span>
+    <span class="n">dates</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">date</span><span class="p">],</span>
+    <span class="n">guess</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.10&quot;</span><span class="p">),</span>
+    <span class="n">tolerance</span><span class="p">:</span> <span class="n">Decimal</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.000001&quot;</span><span class="p">),</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span>
+</code></pre></div>
+<p>Extended IRR for cash flows at <em>irregular dates</em>. Each cash flow is discounted by
+its actual elapsed time from the first date, expressed as a year fraction
+(days / 365). Uses Newton-Raphson internally.</p>
+<p>This is the correct and only fair way to measure portfolio performance when
+contributions are made at irregular intervals (which is always the case in practice).</p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Invest €10,000 on 1 Jan 2025, receive €11,000 on 1 Jan 2026</span>
+<span class="n">xirr</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-10000&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;11000&quot;</span><span class="p">)],</span>
+    <span class="p">[</span><span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+<span class="p">)</span>
+<span class="c1"># → Decimal(&quot;0.100000&quot;)   (10%)</span>
+</code></pre></div></p>
+<p><strong>Example — real portfolio return:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># cashflows: each contribution is negative, current portfolio value is final positive</span>
+<span class="c1"># dates: the actual date of each transaction</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="n">xirr</span><span class="p">(</span><span class="n">cashflows</span><span class="p">,</span> <span class="n">dates</span><span class="p">)</span>
+<span class="n">real</span> <span class="o">=</span> <span class="n">real_rate</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">avg_inflation</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="precision-model-summary">Precision Model Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monetary output</td>
+<td><code>Decimal</code>, 2 decimal places, <code>ROUND_HALF_UP</code></td>
+</tr>
+<tr>
+<td>Rate output</td>
+<td><code>Decimal</code>, 6 decimal places, <code>ROUND_HALF_UP</code></td>
+</tr>
+<tr>
+<td>Exponentiation</td>
+<td>Convert to <code>float</code>, compute, convert back via <code>Decimal(str(x))</code>, then <code>quantize()</code></td>
+</tr>
+<tr>
+<td>Intermediate steps</td>
+<td>No rounding until the final return value</td>
+</tr>
+<tr>
+<td>Final period of amortization</td>
+<td>Balance forced to exactly <code>Decimal("0.00")</code> to eliminate drift</td>
+</tr>
+<tr>
+<td>DataFrame columns</td>
+<td>Use Polars <code>pl.Decimal(scale=2)</code> when loading schedules into Polars</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="confirmed-gaps">Confirmed Gaps</h2>
+<p>Two functions are missing from the library. Both appear in multiple question chains
+in the <a href="../finance-questions/">Financial Questions Map</a>.</p>
+<h3 id="payoff_periods-high-priority"><code>payoff_periods</code> — high priority</h3>
+<p>$$n = \frac{-\ln!\left(1 - \frac{r \cdot P}{PMT}\right)}{\ln(1+r)}$$</p>
+<p>Given a principal, rate, and a (potentially larger-than-minimum) payment, how many
+periods until the loan is paid off? Needed for overpayment analysis,
+consolidation comparison, and fixed vs variable mortgage scenarios.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Planned signature</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">payoff_periods</span><span class="p">(</span>
+    <span class="n">principal</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">pmt</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<h3 id="sinking_fund_payment-high-priority"><code>sinking_fund_payment</code> — high priority</h3>
+<p>$$PMT = FV \cdot \frac{r}{(1+r)^n - 1}$$</p>
+<p>How much must I save per period to accumulate a target future value? The savings-side
+inverse of <code>fv_annuity</code>. Answers the most common personal planning question:
+<em>"How much do I need to save each month?"</em></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Planned signature</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sinking_fund_payment</span><span class="p">(</span>
+    <span class="n">target_fv</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">annual_rate</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="n">CompoundingFreq</span> <span class="o">=</span> <span class="n">CompoundingFreq</span><span class="o">.</span><span class="n">MONTHLY</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<hr />
+<h2 id="testing">Testing</h2>
+<p>112 tests covering all 20 public functions, located in <code>tests/finance/</code>.</p>
+<p>All tests follow this convention:
+- Expected values derived from textbook formulas
+- Arithmetic shown explicitly in comments so any future rounding change can be audited
+- Round-trip tests (e.g. <code>pv → fv → pv</code>) state the accepted tolerance and explain why
+- Input validation tests verify <code>ValueError</code> semantics for all guarded arguments</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

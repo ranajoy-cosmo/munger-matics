@@ -1,0 +1,1239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal accounting, budgeting and financial planning application">
+      
+      
+      
+        <link rel="canonical" href="https://ranajoy-cosmo.github.io/munger-matics/design/data-model/">
+      
+      
+        <link rel="prev" href="../finance-questions/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Data Model - Munger-Matics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Munger-Matics" class="md-header__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Munger-Matics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Munger-Matics" class="md-nav__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Munger-Matics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Financial Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity-Relationship Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        categories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        transactions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#category_rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        category_rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        budgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#savings_goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        savings_goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-initialisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Initialisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity-relationship-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entity-Relationship Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        categories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        transactions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#category_rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        category_rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        budgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#savings_goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        savings_goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-initialisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Initialisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="data-model">Data Model</h1>
+<h2 id="overview">Overview</h2>
+<p>The schema is designed for a single-user personal finance application backed by DuckDB. It covers
+the full application lifecycle from Phase 1 through Phase 4. Tables introduced in later phases are
+noted.</p>
+<p><strong>Conventions across all tables:</strong></p>
+<ul>
+<li>Primary keys are UUIDs generated by DuckDB (<code>gen_random_uuid()</code>)</li>
+<li>Monetary amounts are <code>DECIMAL(15,2)</code> — never <code>FLOAT</code> or <code>DOUBLE</code></li>
+<li>Sign convention: <code>amount &gt; 0</code> = money in, <code>amount &lt; 0</code> = money out</li>
+<li><code>created_at</code> is set once at insert and never updated</li>
+<li>Soft deletes are preferred over hard deletes (use <code>is_active = false</code>)</li>
+</ul>
+<hr />
+<h2 id="entity-relationship-diagram">Entity-Relationship Diagram</h2>
+<pre class="mermaid"><code>erDiagram
+    accounts {
+        UUID id PK
+        VARCHAR name
+        VARCHAR type
+        VARCHAR currency
+        VARCHAR institution
+        DECIMAL opening_balance
+        BOOLEAN is_active
+        TIMESTAMP created_at
+    }
+
+    categories {
+        UUID id PK
+        UUID parent_id FK
+        VARCHAR name
+        VARCHAR direction
+        BOOLEAN is_system
+        INTEGER sort_order
+    }
+
+    transactions {
+        UUID id PK
+        UUID account_id FK
+        UUID category_id FK
+        UUID transfer_peer_id FK
+        DATE date
+        DECIMAL amount
+        VARCHAR description
+        VARCHAR raw_description
+        VARCHAR merchant
+        VARCHAR notes
+        BOOLEAN is_transfer
+        VARCHAR source
+        VARCHAR import_hash
+        TIMESTAMP created_at
+    }
+
+    category_rules {
+        UUID id PK
+        UUID category_id FK
+        VARCHAR pattern
+        VARCHAR match_type
+        INTEGER priority
+        TIMESTAMP created_at
+    }
+
+    budgets {
+        UUID id PK
+        UUID category_id FK
+        DATE month
+        DECIMAL amount
+        TIMESTAMP created_at
+    }
+
+    savings_goals {
+        UUID id PK
+        VARCHAR name
+        DECIMAL target_amount
+        DECIMAL current_amount
+        DATE target_date
+        VARCHAR notes
+        BOOLEAN is_achieved
+        TIMESTAMP created_at
+    }
+
+    accounts ||--o{ transactions : "has"
+    categories ||--o{ transactions : "classifies"
+    categories ||--o{ categories : "parent of"
+    categories ||--o{ category_rules : "matched by"
+    categories ||--o{ budgets : "budgeted in"
+    transactions ||--o| transactions : "transfer peer"</code></pre>
+<hr />
+<h2 id="table-definitions">Table Definitions</h2>
+<h3 id="accounts"><code>accounts</code></h3>
+<p>Each financial account the user holds. Balance is computed from <code>opening_balance</code> plus the sum of
+all transaction amounts, not stored directly (avoids drift).</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">              </span><span class="n">UUID</span><span class="w">         </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">name</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">type</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">                        </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                            </span><span class="s1">&#39;checking&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- current / everyday account</span>
+<span class="w">                            </span><span class="s1">&#39;savings&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- savings account</span>
+<span class="w">                            </span><span class="s1">&#39;investment&#39;</span><span class="p">,</span><span class="w">   </span><span class="c1">-- brokerage / stocks</span>
+<span class="w">                            </span><span class="s1">&#39;retirement&#39;</span><span class="p">,</span><span class="w">   </span><span class="c1">-- pension, provident fund</span>
+<span class="w">                            </span><span class="s1">&#39;credit_card&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- revolving credit</span>
+<span class="w">                            </span><span class="s1">&#39;loan&#39;</span><span class="w">          </span><span class="c1">-- mortgage, personal loan</span>
+<span class="w">                        </span><span class="p">)),</span>
+<span class="w">    </span><span class="n">currency</span><span class="w">        </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;EUR&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">institution</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="p">,</span><span class="w">                </span><span class="c1">-- e.g. &quot;ING&quot;, &quot;DEGIRO&quot;, &quot;NN Group&quot;</span>
+<span class="w">    </span><span class="n">opening_balance</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_active</span><span class="w">       </span><span class="nb">BOOLEAN</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">      </span><span class="k">TIMESTAMP</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Balance calculation:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">opening_balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">amount</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">current_balance</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="n">a</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">opening_balance</span><span class="p">;</span>
+</code></pre></div></p>
+<hr />
+<h3 id="categories"><code>categories</code></h3>
+<p>Two-level hierarchy. Top-level categories have <code>parent_id = NULL</code>. Leaf categories reference a
+top-level category via <code>parent_id</code>. Transactions are assigned to leaf categories only.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">          </span><span class="n">UUID</span><span class="w">     </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">name</span><span class="w">        </span><span class="nb">VARCHAR</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">parent_id</span><span class="w">   </span><span class="n">UUID</span><span class="w">     </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">direction</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">                    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;expense&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;transfer&#39;</span><span class="p">)),</span>
+<span class="w">    </span><span class="n">is_system</span><span class="w">   </span><span class="nb">BOOLEAN</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w">  </span><span class="c1">-- system seeds vs user-created</span>
+<span class="w">    </span><span class="n">sort_order</span><span class="w">  </span><span class="nb">INTEGER</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Seed hierarchy (top-level):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Top-Level Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>income</td>
+<td>Salary</td>
+</tr>
+<tr>
+<td>income</td>
+<td>Investment Income</td>
+</tr>
+<tr>
+<td>income</td>
+<td>Rental Income</td>
+</tr>
+<tr>
+<td>income</td>
+<td>Tax Refund</td>
+</tr>
+<tr>
+<td>income</td>
+<td>Other Income</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Housing</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Groceries</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Dining Out</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Transport</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Utilities</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Health</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Shopping</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Entertainment</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Subscriptions</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Education</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Insurance</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Fees &amp; Charges</td>
+</tr>
+<tr>
+<td>expense</td>
+<td>Other</td>
+</tr>
+<tr>
+<td>transfer</td>
+<td>Transfer In</td>
+</tr>
+<tr>
+<td>transfer</td>
+<td>Transfer Out</td>
+</tr>
+</tbody>
+</table>
+<p>User-defined subcategories can be added under any top-level category. System categories
+(<code>is_system = true</code>) cannot be deleted, only renamed.</p>
+<hr />
+<h3 id="transactions"><code>transactions</code></h3>
+<p>One row per financial transaction. The <code>import_hash</code> field enables safe re-import of the same CSV
+— duplicate rows are silently skipped.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">               </span><span class="n">UUID</span><span class="w">         </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">account_id</span><span class="w">       </span><span class="n">UUID</span><span class="w">         </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">accounts</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="nb">date</span><span class="w">             </span><span class="nb">DATE</span><span class="w">         </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">amount</span><span class="w">           </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- positive = credit, negative = debit</span>
+<span class="w">    </span><span class="n">description</span><span class="w">      </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">   </span><span class="c1">-- cleaned for display</span>
+<span class="w">    </span><span class="n">raw_description</span><span class="w">  </span><span class="nb">VARCHAR</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- original text from bank</span>
+<span class="w">    </span><span class="n">merchant</span><span class="w">         </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">category_id</span><span class="w">      </span><span class="n">UUID</span><span class="w">         </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">notes</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_transfer</span><span class="w">      </span><span class="nb">BOOLEAN</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">    </span><span class="n">transfer_peer_id</span><span class="w"> </span><span class="n">UUID</span><span class="w">         </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">transactions</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">source</span><span class="w">           </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;manual&#39;</span>
+<span class="w">                         </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="k">source</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;manual&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;csv_import&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;api&#39;</span><span class="p">)),</span>
+<span class="w">    </span><span class="n">import_hash</span><span class="w">      </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">UNIQUE</span><span class="p">,</span><span class="w">     </span><span class="c1">-- prevents duplicate imports</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">       </span><span class="k">TIMESTAMP</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Import hash construction:</strong></p>
+<p>The hash is a SHA-256 digest of the concatenation of:
+<code>account_id + date.isoformat() + str(amount) + raw_description</code></p>
+<p>This is deterministic — importing the same file twice produces identical hashes, so the second
+import inserts zero rows.</p>
+<p><strong>Transfer detection logic (applied post-import):</strong></p>
+<p>A pair of transactions is flagged as a transfer when:
+1. <code>amount</code> on one equals <code>−amount</code> on the other (same absolute value, opposite sign)
+2. The two transactions are within 2 calendar days of each other
+3. They belong to different accounts owned by the user</p>
+<p>Both rows are updated: <code>is_transfer = true</code> and <code>transfer_peer_id</code> set to each other's <code>id</code>.
+Transfers are excluded from income/expense aggregations.</p>
+<hr />
+<h3 id="category_rules"><code>category_rules</code></h3>
+<p>Pattern-matching rules applied to <code>raw_description</code> (and optionally <code>merchant</code>) at import time.
+The highest-priority matching rule wins. Rules can be created manually or learned from user
+corrections.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">category_rules</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">          </span><span class="n">UUID</span><span class="w">     </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">pattern</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">match_type</span><span class="w">  </span><span class="nb">VARCHAR</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;contains&#39;</span>
+<span class="w">                    </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">match_type</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                        </span><span class="s1">&#39;contains&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- case-insensitive substring match</span>
+<span class="w">                        </span><span class="s1">&#39;starts_with&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- case-insensitive prefix match</span>
+<span class="w">                        </span><span class="s1">&#39;regex&#39;</span><span class="w">         </span><span class="c1">-- full Python regex</span>
+<span class="w">                    </span><span class="p">)),</span>
+<span class="w">    </span><span class="n">category_id</span><span class="w"> </span><span class="n">UUID</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="n">priority</span><span class="w">    </span><span class="nb">INTEGER</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="c1">-- higher value = higher priority</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">  </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>Rule application order:</strong> descending <code>priority</code>, then descending <code>created_at</code>. First match wins.</p>
+<hr />
+<h3 id="budgets"><code>budgets</code></h3>
+<p>Monthly budget envelopes. One row per (category, month) pair. The <code>month</code> column always stores
+the first day of the month (e.g. <code>2025-03-01</code> for March 2025).</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">budgets</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">          </span><span class="n">UUID</span><span class="w">         </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">category_id</span><span class="w"> </span><span class="n">UUID</span><span class="w">         </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">month</span><span class="w">       </span><span class="nb">DATE</span><span class="w">         </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- always first day of month</span>
+<span class="w">    </span><span class="n">amount</span><span class="w">      </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">  </span><span class="k">TIMESTAMP</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">category_id</span><span class="p">,</span><span class="w"> </span><span class="k">month</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><em>Phase 2 table — created in schema but unused until Phase 2 UI is built.</em></p>
+<hr />
+<h3 id="savings_goals"><code>savings_goals</code></h3>
+<p>Savings targets with optional deadlines. Used in Phase 4 for the house deposit tracker and any
+other named savings goal. <code>current_amount</code> is updated manually or derived from tagged transactions.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">savings_goals</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">              </span><span class="n">UUID</span><span class="w">         </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">name</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">        </span><span class="c1">-- e.g. &quot;House Deposit&quot;</span>
+<span class="w">    </span><span class="n">target_amount</span><span class="w">   </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">target_amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="n">current_amount</span><span class="w">  </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">target_date</span><span class="w">     </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">notes</span><span class="w">           </span><span class="nb">VARCHAR</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_achieved</span><span class="w">     </span><span class="nb">BOOLEAN</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">false</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">      </span><span class="k">TIMESTAMP</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><em>Phase 4 table — created in schema but unused until Phase 4 UI is built.</em></p>
+<hr />
+<h2 id="schema-initialisation">Schema Initialisation</h2>
+<p>All tables are created in <code>src/munger_matics/database/schema.py</code> via the <code>initialise(conn)</code>
+function. It is called once at application startup and is idempotent (<code>CREATE TABLE IF NOT EXISTS</code>).</p>
+<p>The category seed data is inserted by <code>src/munger_matics/categories/seed.py</code>, also idempotent —
+it checks for existing system categories before inserting.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
