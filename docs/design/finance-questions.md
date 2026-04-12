@@ -422,46 +422,308 @@ months = periods_to_target(Decimal("0"), avg_monthly_burn, fund_return, MONTHLY,
 
 ---
 
+## 9. Tax & net income
+
+| Question | Status | Notes |
+|----------|--------|-------|
+| What is my effective tax rate this year? | 📊 | `total_tax_paid / gross_income` from ledger |
+| Am I using annual tax-free allowances? | 📊 | Compare ledger totals to configured thresholds |
+
+### How much gross do I need to earn to take home a target net salary? ⚠️
+
+Requires a `gross_from_net(net, tax_schedule) -> Decimal` function (or a taxpayer model).
+Tax schedules are jurisdiction-specific and change annually — the function must accept a
+configurable bracket table rather than hard-coded rates.
+
+---
+
+### How much of a raise actually lands in my pocket? ⚠️
+
+Same dependency as above. Given `old_gross` and `new_gross`, compute:
+
+```
+# Once gross_from_net is available:
+net_increase = net(new_gross) - net(old_gross)
+effective_raise_rate = net_increase / old_net
+```
+
+---
+
+## 10. Emergency fund & liquidity
+
+### Do I have enough liquid reserves to cover N months of expenses? 📊 + simple arithmetic
+
+```
+monthly_burn = avg_monthly_spend_from_ledger
+coverage     = liquid_balance / monthly_burn
+sufficient   = coverage >= target_months
+```
+
+---
+
+### If I lost income today, how long could I sustain my lifestyle? 🔗
+
+Extends the emergency fund question. If the fund earns a return while being drawn down:
+
+```
+months = periods_to_target(
+    target_fv   = Decimal("0"),
+    pmt         = avg_monthly_burn,
+    annual_rate = fund_return,
+    freq        = MONTHLY,
+    initial_pv  = liquid_balance,
+)
+```
+
+---
+
+## 11. Debt strategy
+
+### In what order should I pay off multiple debts? 📊 + sorting
+
+Two strategies:
+
+- **Avalanche** (minimises interest): sort debts by `annual_rate` descending, direct surplus to highest-rate debt first.
+- **Snowball** (psychological wins): sort by `remaining_balance` ascending.
+
+```
+debts_avalanche = sorted(debts, key=lambda d: d.annual_rate, reverse=True)
+debts_snowball  = sorted(debts, key=lambda d: d.remaining_balance)
+```
+
+For each ordering, compute total interest across all debts using `amortization_schedule`.
+
+---
+
+### At what rate does it stop making sense to hold savings instead of paying down debt? ✅
+
+Above this threshold, the guaranteed after-tax saving from debt repayment beats the
+expected investment return.
+
+```
+debt_rate       = annual_rate_on_debt
+investment_rate = expected_return_on_savings
+
+# If investment_rate_after_tax < debt_rate → repay debt first
+crossover_reached = (investment_rate * (1 - marginal_tax_rate)) < debt_rate
+```
+
+---
+
+## 12. Investment scenarios
+
+### What is my portfolio's break-even inflation rate? 🔗
+
+The inflation level that would completely erode my real return:
+
+```
+nominal_return     = xirr(cashflows, dates)
+# Solve real_rate(nominal_return, inf) = 0 for inf:
+# (1 + nominal) / (1 + inf) - 1 = 0  →  inf = nominal_return
+breakeven_inflation = nominal_return
+```
+
+The nominal XIRR *is* the break-even inflation rate — real return is zero when
+inflation equals the nominal return.
+
+---
+
+### How much would a 20% drawdown reduce my net worth, and how long to recover? 🔗
+
+```
+drawdown_loss  = portfolio_value * Decimal("0.20")
+value_after    = portfolio_value - drawdown_loss
+
+# Years to recover back to original value at assumed return
+recovery_years = years_to_target(value_after, portfolio_value, assumed_return, ANNUAL)
+```
+
+---
+
+### What lump sum today is equivalent to N years of monthly contributions? ✅
+
+```
+equivalent_lump_sum = pv_annuity(monthly_contribution, expected_return, years, MONTHLY)
+```
+
+---
+
+## 13. Large purchases — lease vs buy
+
+### Is it cheaper to lease or buy a car over N years? 🔗
+
+**Buy scenario (net cost)**
+```
+# Finance the purchase
+monthly_loan_pmt = payment(purchase_price - deposit, loan_rate, loan_years, MONTHLY)
+total_loan_cost  = monthly_loan_pmt * (loan_years * 12) + deposit
+# Recover resale value at end of N years
+resale_pv        = present_value(resale_value, discount_rate, N, ANNUAL)
+net_cost_buy     = total_loan_cost - resale_pv
+```
+
+**Lease scenario**
+```
+total_lease_cost = monthly_lease * (N * 12) + upfront_fee
+# No residual value to recover
+```
+
+**Decision:** `net_cost_buy` vs `total_lease_cost` — lower number wins (after adjusting
+for mileage limits, maintenance differences, etc.).
+
+---
+
+### Pay cash vs finance — which is better if the cash could be invested? 🔗
+
+```
+# Option A: pay cash — opportunity cost of not investing
+opportunity_cost = future_value_compound(cash_price, investment_rate, N, ANNUAL) - cash_price
+
+# Option B: finance — interest paid to lender
+schedule         = amortization_schedule(cash_price, loan_rate, N, ANNUAL)
+interest_cost    = sum(r.interest_payment for r in schedule)
+
+# Pay cash if opportunity_cost < interest_cost (i.e. investment return < loan rate)
+```
+
+---
+
+## 14. Children & dependants
+
+### What will a monthly education savings plan be worth at age 18? 🔗
+
+```
+years_to_university = 18 - child_current_age
+
+# Existing balance grows as lump sum
+fv_existing      = future_value_compound(current_education_savings, return_rate, years_to_university, MONTHLY)
+
+# New contributions grow as annuity
+fv_contributions = fv_annuity(monthly_education_contribution, return_rate, years_to_university, MONTHLY)
+
+projected = fv_existing + fv_contributions
+```
+
+---
+
+### What lump sum do I need today to fund university costs in 18 years? 🔗
+
+University costs inflate faster than general CPI — use a separate education inflation rate.
+
+```
+# Step 1: inflate today's university cost to arrival date
+future_cost = future_value_compound(todays_annual_cost * years_at_uni, education_inflation, years_to_go, ANNUAL)
+
+# Step 2: discount back to today at investment return
+lump_sum_needed = present_value(future_cost, investment_return, years_to_go, ANNUAL)
+```
+
+---
+
+## 15. Retirement — extended
+
+### What is my "financial independence number"? 🔗
+
+The portfolio size at which investment returns alone cover annual expenses (25× rule /
+configurable safe withdrawal rate):
+
+```
+annual_expenses   = monthly_expenses * 12
+swr               = Decimal("0.04")          # 4% safe withdrawal rate
+fi_number         = annual_expenses / swr
+
+# Equivalently, PV of a perpetuity:
+# fi_number ≈ pv_annuity(monthly_expenses, swr, very_large_n, MONTHLY)
+```
+
+---
+
+### How does delaying contributions by 5 years affect the retirement pot? 🔗
+
+```
+# Pot if starting today
+pot_now   = fv_annuity(monthly_contribution, expected_return, years_to_retirement, MONTHLY)
+
+# Pot if starting 5 years late
+pot_late  = fv_annuity(monthly_contribution, expected_return, years_to_retirement - 5, MONTHLY)
+
+cost_of_delay         = pot_now - pot_late
+cost_in_todays_money  = present_value(cost_of_delay, inflation_rate, years_to_retirement, ANNUAL)
+```
+
+---
+
+### How does retiring 2 years earlier change what I need to save? 🔗
+
+Two effects compound: a larger nest egg is required (longer drawdown) *and* there are
+fewer years to accumulate it.
+
+```
+# Nest egg needed if retiring 2 years earlier
+nest_egg_early = pv_annuity(monthly_drawdown, return_in_retirement, life_expectancy - (target_age - 2), MONTHLY)
+
+# Projected portfolio with 2 fewer accumulation years
+projected_early = fv_annuity(monthly_contribution, expected_return, years_to_retirement - 2, MONTHLY) \
+                + future_value_compound(current_savings, expected_return, years_to_retirement - 2, MONTHLY)
+
+gap = nest_egg_early - projected_early
+```
+
+---
+
+### What is my projected retirement income from my portfolio + state pension? 📊 + 🔗
+
+```
+# Monthly drawdown the nest egg can sustain
+monthly_portfolio_income = payment(projected_nest_egg, return_in_retirement, drawdown_years, MONTHLY)
+
+state_pension_monthly = configured_value   # from config/
+
+total_monthly_income = monthly_portfolio_income + state_pension_monthly
+```
+
+---
+
 ## Gap Summary
 
-The following functions are missing from the library. Both are used repeatedly in the
-question chains above.
+The following functions are missing from the library.
 
 | Function | Formula | Priority | Used in |
 |----------|---------|----------|---------|
-| `payoff_periods(principal, annual_rate, pmt, freq)` | $n = -\ln(1 - rP/PMT) / \ln(1+r)$ | **High** | Overpayment analysis, consolidation, fixed vs variable, buy vs rent |
-| `sinking_fund_payment(target_fv, annual_rate, years, freq)` | $PMT = FV \cdot r / [(1+r)^n - 1]$ | **High** | Savings planner — the most common personal planning question |
+| `payoff_periods(principal, annual_rate, pmt, freq)` | $n = -\ln(1 - rP/PMT) / \ln(1+r)$ | **High** | Overpayment, consolidation, fixed vs variable, buy vs rent |
+| `sinking_fund_payment(target_fv, annual_rate, years, freq)` | $PMT = FV \cdot r / [(1+r)^n - 1]$ | **High** | Savings planner — most common personal planning question |
+| `gross_from_net(net, tax_schedule)` | jurisdiction-specific bracket table | **Medium** | Net salary target, raise impact |
 
-Everything else in this document can be answered by composing the existing public API.
+Everything else can be answered by composing the existing public API.
 
 ---
 
 ## Function Usage Heatmap
 
-Functions that appear in the most question chains, in order:
+Functions that appear in the most question chains, in order (updated for §§9–15):
 
 | Rank | Function | Chains |
 |------|----------|--------|
-| 1 | `amortization_schedule` | 6 |
-| 2 | `payment` | 5 |
-| 3 | `fv_annuity` | 4 |
-| 4 | `pv_annuity` | 3 |
-| 5 | `periods_to_target` | 3 |
-| 6 | `xirr` | 3 |
-| 7 | `future_value_compound` | 3 |
-| 8 | `real_rate` | 3 |
-| 9 | `present_value` | 3 |
+| 1 | `future_value_compound` | 9 |
+| 2 | `fv_annuity` | 8 |
+| 3 | `pv_annuity` | 7 |
+| 4 | `amortization_schedule` | 7 |
+| 5 | `present_value` | 6 |
+| 6 | `payment` | 6 |
+| 7 | `periods_to_target` | 4 |
+| 8 | `xirr` | 3 |
+| 9 | `real_rate` | 3 |
 | 10 | `cagr` | 2 |
-| 11 | `annuity_required_rate` | 1 |
-| 12 | `future_value_simple` | 0 |
-| 13 | `irr` | 0 (subsumed by `xirr`) |
-| 14 | `effective_annual_rate` | 0 (rate normalisation, pre-processing) |
-| 15 | `nominal_from_ear` | 0 (rate normalisation, pre-processing) |
-| 16 | `required_rate` | 0 |
-| 17 | `years_to_target` | 0 |
+| 11 | `years_to_target` | 1 |
+| 12 | `annuity_required_rate` | 1 |
+| 13 | `future_value_simple` | 0 |
+| 14 | `irr` | 0 (subsumed by `xirr`) |
+| 15 | `effective_annual_rate` | 0 (rate normalisation, pre-processing) |
+| 16 | `nominal_from_ear` | 0 (rate normalisation, pre-processing) |
+| 17 | `required_rate` | 0 |
 
-`future_value_simple`, `irr`, `effective_annual_rate`, `nominal_from_ear`, `required_rate`,
-and `years_to_target` are correct and well-tested but do not appear directly in
-user-facing question chains. They are either used as pre-processing steps
-(rate normalisation before passing to other functions) or are edge-case tools. They
-should stay in the library for completeness but are low priority for dashboard exposure.
+`future_value_simple`, `irr`, `effective_annual_rate`, `nominal_from_ear`, and
+`required_rate` are correct and well-tested but do not appear directly in user-facing
+question chains. They are either pre-processing steps (rate normalisation) or edge-case
+tools. They should stay in the library for completeness but are low priority for
+dashboard exposure.
