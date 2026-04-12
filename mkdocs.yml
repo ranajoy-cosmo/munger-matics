@@ -20,9 +20,12 @@ nav:
   - Getting Started: getting-started.md
   - Architecture: architecture.md
   - Contributing: contributing.md
-
-exclude_docs: |
-  design/
+  - Design:
+    - Product Vision: design/product-vision.md
+    - Roadmap: design/roadmap.md
+    - Finance Library: design/finance-library.md
+    - Financial Questions: design/finance-questions.md
+    - Data Model: design/data-model.md
 
 markdown_extensions:
   - pymdownx.superfences:
