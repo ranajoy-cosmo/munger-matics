@@ -11,6 +11,7 @@ import pytest
 from munger_matics.finance._common import CompoundingFreq
 from munger_matics.finance.annuities import (
     amortization_schedule,
+    annuity_required_rate,
     fv_annuity,
     payment,
     periods_to_target,
@@ -331,3 +332,81 @@ def test_amortization_final_payment_adjustment_is_small() -> None:
     final_pmt = schedule[-1].payment
     adjustment = abs(final_pmt - regular_pmt)
     assert adjustment < Decimal("2.00")
+
+
+# ---------------------------------------------------------------------------
+# annuity_required_rate
+# ---------------------------------------------------------------------------
+
+
+def test_annuity_required_rate_from_zero() -> None:
+    # Save $500/month for 30 years to reach ~$610K. We know from
+    # test_fv_annuity_retirement_savings that 7% annual produces ~$609,985.
+    # So the required rate to reach $609985 should be ~0.07.
+    result = annuity_required_rate(
+        Decimal("609985"),
+        Decimal("500"),
+        30,
+        CompoundingFreq.MONTHLY,
+    )
+    assert abs(result - Decimal("0.07")) <= Decimal("0.0001")
+
+
+def test_annuity_required_rate_with_initial_balance() -> None:
+    # Have $10K, save $1,000/month for 10 years to reach $200K.
+    # Round-trip: compute rate, then verify FV matches target.
+    target = Decimal("200000")
+    pmt = Decimal("1000")
+    years = 10
+    pv = Decimal("10000")
+    freq = CompoundingFreq.MONTHLY
+
+    rate = annuity_required_rate(target, pmt, years, freq, initial_pv=pv)
+
+    # Verify: PV*(1+r/m)^(m*t) + PMT*[((1+r/m)^(m*t) - 1) / (r/m)]
+    r = float(rate) / int(freq)
+    n = years * int(freq)
+    g = (1.0 + r) ** n
+    fv_check = float(pv) * g + float(pmt) * (g - 1.0) / r
+    assert abs(fv_check - float(target)) < 1.0
+
+
+def test_annuity_required_rate_zero_initial() -> None:
+    # $1,000/year for 10 years to reach $12,577.89 (the FV annuity at 5%).
+    result = annuity_required_rate(
+        Decimal("12577.89"),
+        Decimal("1000"),
+        10,
+        CompoundingFreq.ANNUAL,
+    )
+    assert abs(result - Decimal("0.05")) <= Decimal("0.0001")
+
+
+def test_annuity_required_rate_low_target() -> None:
+    # Target barely above what contributions alone would produce (rate ≈ 0).
+    # $100/month for 10 years = $12,000 at 0%. Target $12,100 needs tiny rate.
+    result = annuity_required_rate(
+        Decimal("12100"),
+        Decimal("100"),
+        10,
+        CompoundingFreq.MONTHLY,
+    )
+    assert result >= Decimal("0")
+    assert result < Decimal("0.01")
+
+
+def test_annuity_required_rate_negative_target_raises() -> None:
+    with pytest.raises(ValueError, match="target_fv"):
+        annuity_required_rate(Decimal("-1000"), Decimal("100"), 5)
+
+
+def test_annuity_required_rate_zero_pmt_raises() -> None:
+    with pytest.raises(ValueError, match="pmt"):
+        annuity_required_rate(Decimal("10000"), Decimal("0"), 5)
+
+
+def test_annuity_required_rate_negative_initial_raises() -> None:
+    with pytest.raises(ValueError, match="initial_pv"):
+        annuity_required_rate(
+            Decimal("10000"), Decimal("100"), 5, initial_pv=Decimal("-1000")
+        )

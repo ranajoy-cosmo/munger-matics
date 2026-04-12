@@ -5,11 +5,17 @@ from decimal import Decimal
 
 from pydantic import BaseModel, ConfigDict
 
-from munger_matics.finance._common import CompoundingFreq, _quantize
+from munger_matics.finance._common import (
+    CompoundingFreq,
+    _newton_solve,
+    _quantize,
+    _quantize_rate,
+)
 
 __all__ = [
     "AmortizationRow",
     "amortization_schedule",
+    "annuity_required_rate",
     "fv_annuity",
     "payment",
     "periods_to_target",
@@ -279,3 +285,80 @@ def amortization_schedule(
             )
 
     return rows
+
+
+def annuity_required_rate(
+    target_fv: Decimal,
+    pmt: Decimal,
+    years: int | float,
+    freq: CompoundingFreq = CompoundingFreq.ANNUAL,
+    initial_pv: Decimal = Decimal("0"),
+    guess: Decimal = Decimal("0.05"),
+    tolerance: Decimal = Decimal("0.000001"),
+    max_iterations: int = 200,
+) -> Decimal:
+    """Annual rate needed to reach a target with regular contributions.
+
+    Solves: PV×(1+r)^n + PMT×[(1+r)^n − 1]/r = target  for the annual rate.
+
+    No closed-form solution exists; uses Newton-Raphson.
+
+    "I have €10K, save €500/month, want €100K in 10 years — what return
+    do I need?"
+
+    Args:
+        target_fv: Target future value. Must be > 0.
+        pmt: Periodic contribution. Must be > 0.
+        years: Time horizon in years. Must be > 0.
+        freq: Contribution and compounding frequency. Defaults to ANNUAL.
+        initial_pv: Starting balance. Must be >= 0. Defaults to 0.
+        guess: Initial rate estimate. Defaults to 5%.
+        tolerance: Convergence threshold.
+        max_iterations: Maximum solver iterations.
+
+    Returns:
+        Nominal annual rate as a decimal fraction, rounded to 6 decimal places.
+    """
+    if target_fv <= Decimal(0):
+        raise ValueError(f"target_fv must be > 0, got {target_fv}")
+    if pmt <= Decimal(0):
+        raise ValueError(f"pmt must be > 0, got {pmt}")
+    if years <= 0:
+        raise ValueError(f"years must be > 0, got {years}")
+    if initial_pv < Decimal(0):
+        raise ValueError(f"initial_pv must be >= 0, got {initial_pv}")
+
+    pv = float(initial_pv)
+    target = float(target_fv)
+    p = float(pmt)
+    m = int(freq)
+    n = float(years) * m
+
+    # f(r) = PV*(1+r)^n + PMT*[(1+r)^n - 1]/r - target = 0
+    # where r is the periodic rate (annual_rate / freq).
+    #
+    # f'(r) = PV*n*(1+r)^(n-1)
+    #       + PMT * [n*r*(1+r)^(n-1) - (1+r)^n + 1] / r^2
+
+    def f(r: float) -> float:
+        if abs(r) < 1e-12:
+            # At r≈0: FV ≈ PV + PMT*n
+            return pv + p * n - target
+        g = (1.0 + r) ** n
+        return pv * g + p * (g - 1.0) / r - target
+
+    def df(r: float) -> float:
+        if abs(r) < 1e-12:
+            # Derivative at r≈0 (linear approximation):
+            # d/dr[PV*(1+r)^n] ≈ PV*n
+            # d/dr[PMT*n] ≈ PMT*n*(n-1)/2 (Taylor expansion of FVA)
+            return pv * n + p * n * (n - 1.0) / 2.0
+        g = (1.0 + r) ** n
+        dg = n * (1.0 + r) ** (n - 1.0)
+        return pv * dg + p * (r * dg - g + 1.0) / (r * r)
+
+    periodic_rate = _newton_solve(
+        f, df, float(guess) / m, float(tolerance), max_iterations
+    )
+    annual_rate = periodic_rate * m
+    return _quantize_rate(annual_rate)
