@@ -55,17 +55,31 @@ like buying a home and retiring.
 | UC7 | Model how long until a target property price is affordable given current savings rate | 4 |
 | UC8 | Project retirement savings under different contribution and return assumptions | 4 |
 
+All planning and projection use cases (UC6–UC8) are backed by the finance math library,
+which is complete and tested. See [Finance Library](finance-library.md) and the
+[Financial Questions Algorithm Map](finance-questions.md) for the calculation detail behind
+each use case.
+
 ---
 
 ## Feature Phases
 
-### Phase 1 — Financial Ledger
+### Foundation — Finance Math Library ✅ Complete
+*The quantitative engine. Built before UI work began to ensure correctness of all projection and planning features.*
+
+- 20 pure functions across 4 modules: `compounding`, `annuities`, `rates`, `cashflows`
+- All monetary values use `decimal.Decimal` — never `float`
+- Self-contained Newton-Raphson solver (no `scipy` dependency) for IRR and XIRR
+- 112 tests with explicit arithmetic in comments for audit traceability
+- See [Finance Library](finance-library.md) for the complete reference
+
+### Phase 1 — Financial Ledger 🔧 In Progress
 *The data foundation. Nothing else is meaningful without this.*
 
 - Account management: add, edit, and deactivate accounts (bank, savings, investment, retirement, credit card, loan)
-- CSV import wizard: upload → map columns → preview → confirm
+- CSV import wizard: upload → map columns → preview → confirm *(CCF parser built; generic mapper in progress)*
 - Manual transaction entry
-- Transaction deduplication (safe to re-import the same CSV)
+- Transaction deduplication (safe to re-import the same CSV) ✅
 - Category hierarchy: seeded defaults + user-defined additions
 - Category rules: pattern-matching engine to auto-categorise on import
 - Transaction ledger with filtering by account, date range, and category

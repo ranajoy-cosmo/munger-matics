@@ -13,6 +13,8 @@ from munger_matics.finance.compounding import (
     future_value_compound,
     future_value_simple,
     present_value,
+    required_rate,
+    years_to_target,
 )
 
 
@@ -155,3 +157,109 @@ def test_pv_negative_rate_raises() -> None:
 def test_pv_negative_fv_raises() -> None:
     with pytest.raises(ValueError, match="fv"):
         present_value(Decimal("-100"), Decimal("0.05"), 1)
+
+
+# ---------------------------------------------------------------------------
+# years_to_target
+# ---------------------------------------------------------------------------
+
+
+def test_years_to_target_doubling_rule_of_72() -> None:
+    # At 6% annual, doubling takes ~11.90 years.
+    # ln(2) / ln(1.06) = 0.693147 / 0.058269 ≈ 11.90
+    result = years_to_target(Decimal("10000"), Decimal("20000"), Decimal("0.06"))
+    assert result == 11.9
+
+
+def test_years_to_target_monthly_compounding() -> None:
+    # €10K to €20K at 5% compounded monthly.
+    # t = ln(2) / (12 × ln(1 + 0.05/12))
+    # = 0.693147 / (12 × 0.004158) = 0.693147 / 0.049896 ≈ 13.89
+    result = years_to_target(
+        Decimal("10000"),
+        Decimal("20000"),
+        Decimal("0.05"),
+        CompoundingFreq.MONTHLY,
+    )
+    assert result == 13.89
+
+
+def test_years_to_target_round_trip_with_fv() -> None:
+    # Compute years, then verify future_value_compound recovers the target.
+    pv = Decimal("5000")
+    target_fv = Decimal("8000")
+    rate = Decimal("0.04")
+    freq = CompoundingFreq.MONTHLY
+
+    t = years_to_target(pv, target_fv, rate, freq)
+    recovered_fv = future_value_compound(pv, rate, t, freq)
+    assert abs(recovered_fv - target_fv) <= Decimal("1.00")
+
+
+def test_years_to_target_zero_pv_raises() -> None:
+    with pytest.raises(ValueError, match="pv"):
+        years_to_target(Decimal("0"), Decimal("1000"), Decimal("0.05"))
+
+
+def test_years_to_target_zero_rate_raises() -> None:
+    with pytest.raises(ValueError, match="annual_rate"):
+        years_to_target(Decimal("1000"), Decimal("2000"), Decimal("0"))
+
+
+def test_years_to_target_negative_fv_raises() -> None:
+    with pytest.raises(ValueError, match="fv"):
+        years_to_target(Decimal("1000"), Decimal("-500"), Decimal("0.05"))
+
+
+# ---------------------------------------------------------------------------
+# required_rate
+# ---------------------------------------------------------------------------
+
+
+def test_required_rate_doubling_in_ten_years() -> None:
+    # €10K → €20K in 10 years, annual compounding.
+    # r = (20000/10000)^(1/10) - 1 = 2^0.1 - 1 ≈ 0.071773
+    result = required_rate(Decimal("10000"), Decimal("20000"), 10)
+    assert result == Decimal("0.071773")
+
+
+def test_required_rate_monthly_compounding() -> None:
+    # €50K → €100K in 10 years, monthly compounding.
+    # r = 12 × [(100000/50000)^(1/120) - 1]
+    # = 12 × [2^(1/120) - 1] = 12 × 0.005793 ≈ 0.069515
+    result = required_rate(
+        Decimal("50000"), Decimal("100000"), 10, CompoundingFreq.MONTHLY
+    )
+    assert result == Decimal("0.069515")
+
+
+def test_required_rate_round_trip_with_fv() -> None:
+    # Compute rate, then verify future_value_compound recovers FV.
+    pv = Decimal("10000")
+    target_fv = Decimal("15000")
+    years = 7
+
+    rate = required_rate(pv, target_fv, years, CompoundingFreq.MONTHLY)
+    recovered_fv = future_value_compound(pv, rate, years, CompoundingFreq.MONTHLY)
+    assert abs(recovered_fv - target_fv) <= Decimal("1.00")
+
+
+def test_required_rate_no_growth() -> None:
+    # FV == PV → rate = 0
+    result = required_rate(Decimal("5000"), Decimal("5000"), 10)
+    assert result == Decimal("0.000000")
+
+
+def test_required_rate_zero_pv_raises() -> None:
+    with pytest.raises(ValueError, match="pv"):
+        required_rate(Decimal("0"), Decimal("1000"), 5)
+
+
+def test_required_rate_zero_years_raises() -> None:
+    with pytest.raises(ValueError, match="years"):
+        required_rate(Decimal("1000"), Decimal("2000"), 0)
+
+
+def test_required_rate_negative_fv_raises() -> None:
+    with pytest.raises(ValueError, match="fv"):
+        required_rate(Decimal("1000"), Decimal("-500"), 5)

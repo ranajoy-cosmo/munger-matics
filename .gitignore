@@ -1,3 +1,10 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# MkDocs build output — never commit, deployed via GitHub Actions
+site/
+
 # Python-generated files
 __pycache__/
 *.py[oc]

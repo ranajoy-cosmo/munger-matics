@@ -4,9 +4,32 @@ This document describes the five planned phases of Munger-Matics. Each phase has
 entry criteria, and exit criteria (definition of done). Phases are sequential — later phases depend
 on data and infrastructure from earlier ones.
 
+**Last updated:** April 2026
+
 ---
 
-## Phase 1 — Financial Ledger
+## Foundation — Finance Math Library ✅ Complete
+
+Before Phase 1 UI work proceeded, the quantitative core was built as a standalone,
+fully-tested library. All planning and projection features in Phases 3 and 4 consume
+these functions directly. See [Finance Library](finance-library.md) for the full reference.
+
+**What was built (`munger_matics.finance`):**
+
+| Module | Status | Functions |
+|--------|--------|-----------|
+| `compounding` | ✅ | `future_value_simple`, `future_value_compound`, `present_value`, `required_rate`, `years_to_target` |
+| `annuities` | ✅ | `payment`, `pv_annuity`, `fv_annuity`, `periods_to_target`, `amortization_schedule`, `annuity_required_rate` |
+| `rates` | ✅ | `effective_annual_rate`, `nominal_from_ear`, `real_rate`, `cagr` |
+| `cashflows` | ✅ | `npv`, `irr`, `xirr` |
+
+**Known gaps (to be filled before Phase 3 dashboard work):**
+- `payoff_periods` — needed for overpayment and consolidation analysis
+- `sinking_fund_payment` — needed for savings target planning
+
+---
+
+## Phase 1 — Financial Ledger 🔧 In Progress
 
 **Entry criteria:** None. This is where development begins.
 
@@ -21,11 +44,11 @@ categorise them, and see a basic picture of their spending.
 - Deactivate an account (soft delete — transactions are preserved)
 - View all accounts with computed current balance
 
-**CSV Import**
+**CSV Import** — ✅ CCF parser built; generic column-mapping in progress
 - Upload a CSV file from any bank or broker
 - Map CSV columns to the standard fields: date, amount, description
 - Preview parsed rows before confirming import
-- Detect and skip duplicate transactions (hash-based deduplication)
+- Detect and skip duplicate transactions (hash-based deduplication) ✅
 - Save column mapping per institution so it is reused on the next import
 - Institution mappings stored in `config/csv_mappings.toml`
 
