@@ -13,6 +13,11 @@ dist/
 wheels/
 *.egg-info
 
+# Test and analysis outputs
+.coverage
+.coverage.*
+htmlcov/
+
 # Virtual environments
 .venv
 
