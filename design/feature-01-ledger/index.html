@@ -1,0 +1,1197 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal accounting, budgeting and financial planning application">
+      
+      
+      
+        <link rel="canonical" href="https://ranajoy-cosmo.github.io/munger-matics/design/feature-01-ledger/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Feature Spec: Phase 1 — Financial Ledger - Munger-Matics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#feature-spec-phase-1-financial-ledger" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Munger-Matics" class="md-header__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Munger-Matics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Feature Spec: Phase 1 — Financial Ledger
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Munger-Matics" class="md-nav__button md-logo" aria-label="Munger-Matics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Munger-Matics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ranajoy-cosmo/munger-matics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ranajoy-cosmo/munger-matics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Product Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Financial Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#new-source-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Source Modules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-app-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New App Pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-schema-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#csv-import-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CSV Import Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CSV Import Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#column-mapping-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column Mapping Config
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-wizard-3-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Wizard (3 steps)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deduplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deduplication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#category-rules-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Category Rules Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transfer-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transfer Detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-implementation-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Implementation Constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testsdatabasetest_schemapy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/database/test_schema.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testsaccountstest_repositorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/accounts/test_repository.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teststransactionstest_import_csvpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/transactions/test_import_csv.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teststransactionstest_repositorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/transactions/test_repository.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testscategoriestest_rulespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/categories/test_rules.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testscategoriestest_seedpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests/categories/test_seed.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files-to-create" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Files to Create
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="feature-spec-phase-1-financial-ledger">Feature Spec: Phase 1 — Financial Ledger</h1>
+<p>This document is the implementation spec for Phase 1. It is the detailed, actionable reference for
+each development session within Phase 1. The scope is defined in <a href="../roadmap/">Roadmap: Phase 1</a>.</p>
+<hr />
+<h2 id="new-source-modules">New Source Modules</h2>
+<div class="highlight"><pre><span></span><code>src/munger_matics/
+  database/
+    schema.py           # UPDATED: add all Phase 1 DDL to initialise()
+  accounts/
+    __init__.py         # exports: Account, add_account, get_account, list_accounts, deactivate_account
+    models.py           # Pydantic: Account, AccountCreate
+    repository.py       # DuckDB CRUD
+  transactions/
+    __init__.py         # exports: Transaction, import_csv, add_transaction, list_transactions
+    models.py           # Pydantic: Transaction, TransactionCreate
+    repository.py       # bulk insert, list with filters, balance query
+    import_csv.py       # CSV parse → TransactionCreate list, dedup hash generation
+  categories/
+    __init__.py         # exports: Category, add_category, list_categories, apply_rules
+    models.py           # Pydantic: Category, CategoryCreate, CategoryRule, CategoryRuleCreate
+    repository.py       # CRUD for categories and category_rules
+    seed.py             # insert default hierarchy (idempotent)
+    rules.py            # apply_rules(rows) → rows with category_id set
+</code></pre></div>
+<hr />
+<h2 id="new-app-pages">New App Pages</h2>
+<div class="highlight"><pre><span></span><code>app/pages/
+  01_dashboard.py       # account balances, monthly income/expense, top-5 categories
+  02_accounts.py        # add / edit / deactivate accounts
+  03_import.py          # 3-step CSV import wizard
+  04_transactions.py    # full ledger with filters and inline category editing
+  05_categories.py      # manage categories and rules
+</code></pre></div>
+<p><code>app/app.py</code> remains the entry point; update it to set <code>st.set_page_config</code> and add navigation.</p>
+<hr />
+<h2 id="database-schema-changes">Database Schema Changes</h2>
+<p>Update <code>src/munger_matics/database/schema.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">initialise</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">DuckDBPyConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS accounts (</span>
+<span class="s2">            id              UUID         PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            name            VARCHAR      NOT NULL,</span>
+<span class="s2">            type            VARCHAR      NOT NULL</span>
+<span class="s2">                                CHECK (type IN (&#39;checking&#39;,&#39;savings&#39;,&#39;investment&#39;,</span>
+<span class="s2">                                                &#39;retirement&#39;,&#39;credit_card&#39;,&#39;loan&#39;)),</span>
+<span class="s2">            currency        VARCHAR(3)   NOT NULL DEFAULT &#39;EUR&#39;,</span>
+<span class="s2">            institution     VARCHAR,</span>
+<span class="s2">            opening_balance DECIMAL(15,2) NOT NULL DEFAULT 0,</span>
+<span class="s2">            is_active       BOOLEAN      NOT NULL DEFAULT true,</span>
+<span class="s2">            created_at      TIMESTAMP    NOT NULL DEFAULT now()</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS categories (</span>
+<span class="s2">            id          UUID     PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            name        VARCHAR  NOT NULL,</span>
+<span class="s2">            parent_id   UUID     REFERENCES categories(id),</span>
+<span class="s2">            direction   VARCHAR  NOT NULL</span>
+<span class="s2">                            CHECK (direction IN (&#39;income&#39;,&#39;expense&#39;,&#39;transfer&#39;)),</span>
+<span class="s2">            is_system   BOOLEAN  NOT NULL DEFAULT false,</span>
+<span class="s2">            sort_order  INTEGER  NOT NULL DEFAULT 0</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS transactions (</span>
+<span class="s2">            id               UUID         PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            account_id       UUID         NOT NULL REFERENCES accounts(id),</span>
+<span class="s2">            date             DATE         NOT NULL,</span>
+<span class="s2">            amount           DECIMAL(15,2) NOT NULL,</span>
+<span class="s2">            description      VARCHAR      NOT NULL,</span>
+<span class="s2">            raw_description  VARCHAR,</span>
+<span class="s2">            merchant         VARCHAR,</span>
+<span class="s2">            category_id      UUID         REFERENCES categories(id),</span>
+<span class="s2">            notes            VARCHAR,</span>
+<span class="s2">            is_transfer      BOOLEAN      NOT NULL DEFAULT false,</span>
+<span class="s2">            transfer_peer_id UUID         REFERENCES transactions(id),</span>
+<span class="s2">            source           VARCHAR      NOT NULL DEFAULT &#39;manual&#39;</span>
+<span class="s2">                                 CHECK (source IN (&#39;manual&#39;,&#39;csv_import&#39;,&#39;api&#39;)),</span>
+<span class="s2">            import_hash      VARCHAR      UNIQUE,</span>
+<span class="s2">            created_at       TIMESTAMP    NOT NULL DEFAULT now()</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS category_rules (</span>
+<span class="s2">            id          UUID     PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            pattern     VARCHAR  NOT NULL,</span>
+<span class="s2">            match_type  VARCHAR  NOT NULL DEFAULT &#39;contains&#39;</span>
+<span class="s2">                            CHECK (match_type IN (&#39;contains&#39;,&#39;starts_with&#39;,&#39;regex&#39;)),</span>
+<span class="s2">            category_id UUID     NOT NULL REFERENCES categories(id),</span>
+<span class="s2">            priority    INTEGER  NOT NULL DEFAULT 0,</span>
+<span class="s2">            created_at  TIMESTAMP NOT NULL DEFAULT now()</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS budgets (</span>
+<span class="s2">            id          UUID         PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            category_id UUID         NOT NULL REFERENCES categories(id),</span>
+<span class="s2">            month       DATE         NOT NULL,</span>
+<span class="s2">            amount      DECIMAL(15,2) NOT NULL CHECK (amount &gt; 0),</span>
+<span class="s2">            created_at  TIMESTAMP    NOT NULL DEFAULT now(),</span>
+<span class="s2">            UNIQUE (category_id, month)</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS savings_goals (</span>
+<span class="s2">            id              UUID         PRIMARY KEY DEFAULT gen_random_uuid(),</span>
+<span class="s2">            name            VARCHAR      NOT NULL,</span>
+<span class="s2">            target_amount   DECIMAL(15,2) NOT NULL CHECK (target_amount &gt; 0),</span>
+<span class="s2">            current_amount  DECIMAL(15,2) NOT NULL DEFAULT 0,</span>
+<span class="s2">            target_date     DATE,</span>
+<span class="s2">            notes           VARCHAR,</span>
+<span class="s2">            is_achieved     BOOLEAN      NOT NULL DEFAULT false,</span>
+<span class="s2">            created_at      TIMESTAMP    NOT NULL DEFAULT now()</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="csv-import-design">CSV Import Design</h2>
+<h3 id="column-mapping-config">Column Mapping Config</h3>
+<p>Institution-specific column mappings are stored in <code>config/csv_mappings.toml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[ing]</span>
+<span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Date&quot;</span>
+<span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Amount&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Description&quot;</span>
+<span class="n">date_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;%d/%m/%Y&quot;</span>
+<span class="n">decimal_separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="n">thousands_separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+
+<span class="k">[n26]</span>
+<span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Date&quot;</span>
+<span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Amount (EUR)&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Payee&quot;</span>
+<span class="n">date_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;%Y-%m-%d&quot;</span>
+<span class="n">decimal_separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+</code></pre></div>
+<p>A "generic" mapping is attempted as a fallback when no institution is selected.</p>
+<h3 id="import-wizard-3-steps">Import Wizard (3 steps)</h3>
+<p><strong>Step 1 — Upload</strong>
+- <code>st.file_uploader</code> accepting <code>.csv</code>
+- Auto-detect delimiter (comma or semicolon) and encoding (UTF-8 or Latin-1)
+- Show raw preview (first 5 rows)
+- Institution selector dropdown (populated from <code>config/csv_mappings.toml</code> keys + "Generic")</p>
+<p><strong>Step 2 — Map Columns</strong>
+- If institution is known: pre-fill column mapping from config and allow override
+- If generic: show dropdowns for (date column, amount column, description column)
+- Date format input (pre-filled per institution)
+- Show parsed preview (5 rows in standard format) with types applied</p>
+<p><strong>Step 3 — Review &amp; Confirm</strong>
+- Parse all rows
+- Show: N total rows, M duplicates that will be skipped, K new rows to import
+- Apply category rules to new rows; show predicted categories
+- "Confirm import" button → bulk insert → success message with import count</p>
+<h3 id="deduplication">Deduplication</h3>
+<p>Hash is computed as:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_import_hash</span><span class="p">(</span><span class="n">account_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">raw_description</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">account_id</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">raw_description</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">payload</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</code></pre></div>
+<p>On bulk insert, rows with a hash already present in the <code>import_hash</code> column are skipped silently.</p>
+<hr />
+<h2 id="category-rules-engine">Category Rules Engine</h2>
+<p>Rules are applied in order of descending <code>priority</code>, then descending <code>created_at</code>. The first
+matching rule wins.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># categories/rules.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_rules</span><span class="p">(</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TransactionCreate</span><span class="p">],</span>
+    <span class="n">rules</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">CategoryRule</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TransactionCreate</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign category_id to each row where it is None.</span>
+<span class="sd">    Rows that already have a category_id are not modified.</span>
+<span class="sd">    Returns the same list with category_ids populated where rules matched.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p>Match types:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contains</code></td>
+<td><code>pattern.lower() in raw_description.lower()</code></td>
+</tr>
+<tr>
+<td><code>starts_with</code></td>
+<td><code>raw_description.lower().startswith(pattern.lower())</code></td>
+</tr>
+<tr>
+<td><code>regex</code></td>
+<td><code>re.search(pattern, raw_description, re.IGNORECASE)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="transfer-detection">Transfer Detection</h2>
+<p>Run after import (or on demand from the transactions page):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># transactions/repository.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_transfers</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">account_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">window_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identify transaction pairs that are inter-account transfers.</span>
+<span class="sd">    Criteria:</span>
+<span class="sd">      - amount on one row equals -amount on the other</span>
+<span class="sd">      - both belong to accounts in account_ids</span>
+<span class="sd">      - dates are within window_days of each other</span>
+<span class="sd">      - neither is already flagged as a transfer</span>
+
+<span class="sd">    Updates both rows: is_transfer=true, transfer_peer_id=each other&#39;s id.</span>
+<span class="sd">    Returns number of pairs detected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="key-implementation-constraints">Key Implementation Constraints</h2>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Decimal</code> everywhere</td>
+<td>Import <code>from decimal import Decimal</code>. Never cast amounts to <code>float</code>.</td>
+</tr>
+<tr>
+<td>No <code>float</code> in schema</td>
+<td>DuckDB column type is <code>DECIMAL(15,2)</code>. Python type is <code>Decimal</code>.</td>
+</tr>
+<tr>
+<td>Pydantic boundary</td>
+<td>All data crossing from DB to app logic goes through a Pydantic model.</td>
+</tr>
+<tr>
+<td><code>app/</code> is dumb</td>
+<td>App pages call repository functions. Zero calculation logic in <code>app/</code>.</td>
+</tr>
+<tr>
+<td>Idempotent schema</td>
+<td><code>CREATE TABLE IF NOT EXISTS</code> — <code>initialise()</code> is safe to call multiple times.</td>
+</tr>
+<tr>
+<td>Idempotent seed</td>
+<td><code>seed.py</code> checks for existing system categories before inserting.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="test-plan">Test Plan</h2>
+<p>Each sub-module requires tests in the mirrored <code>tests/</code> path.</p>
+<h3 id="testsdatabasetest_schemapy"><code>tests/database/test_schema.py</code></h3>
+<ul>
+<li><code>test_initialise_creates_all_tables</code> — run <code>initialise()</code>, assert all 6 tables exist</li>
+<li><code>test_initialise_is_idempotent</code> — run <code>initialise()</code> twice, no error, same tables</li>
+</ul>
+<h3 id="testsaccountstest_repositorypy"><code>tests/accounts/test_repository.py</code></h3>
+<ul>
+<li><code>test_add_account_returns_id</code></li>
+<li><code>test_list_accounts_excludes_inactive</code></li>
+<li><code>test_balance_calculation</code> — opening_balance=100, two transactions (+50, -30) → balance=120</li>
+<li><code>test_deactivate_does_not_delete</code></li>
+</ul>
+<h3 id="teststransactionstest_import_csvpy"><code>tests/transactions/test_import_csv.py</code></h3>
+<ul>
+<li><code>test_parse_ing_csv</code> — parse a known fixture, assert correct date/amount/description</li>
+<li><code>test_parse_n26_csv</code> — same for N26 format</li>
+<li><code>test_dedup_hash_is_stable</code> — same inputs produce same hash</li>
+<li><code>test_duplicate_detection</code> — import same rows twice, second import inserts 0 rows</li>
+<li><code>test_negative_amount_is_debit</code> — amount column "-50.00" → Decimal("-50.00")</li>
+</ul>
+<h3 id="teststransactionstest_repositorypy"><code>tests/transactions/test_repository.py</code></h3>
+<ul>
+<li><code>test_bulk_insert</code></li>
+<li><code>test_list_filter_by_account</code></li>
+<li><code>test_list_filter_by_date_range</code></li>
+<li><code>test_list_filter_by_category</code></li>
+<li><code>test_transfer_detection</code> — two matching rows → both flagged, linked</li>
+</ul>
+<h3 id="testscategoriestest_rulespy"><code>tests/categories/test_rules.py</code></h3>
+<ul>
+<li><code>test_contains_rule_matches</code></li>
+<li><code>test_starts_with_rule_matches</code></li>
+<li><code>test_regex_rule_matches</code></li>
+<li><code>test_priority_order</code> — two matching rules, higher priority wins</li>
+<li><code>test_existing_category_not_overwritten</code> — rows with a category_id are left unchanged</li>
+</ul>
+<h3 id="testscategoriestest_seedpy"><code>tests/categories/test_seed.py</code></h3>
+<ul>
+<li><code>test_seed_inserts_all_system_categories</code></li>
+<li><code>test_seed_is_idempotent</code> — run twice, same row count</li>
+</ul>
+<hr />
+<h2 id="dashboard-queries">Dashboard Queries</h2>
+<p>The dashboard is driven by two queries (both executed via <code>get_connection()</code>):</p>
+<p><strong>Account balances:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="k">type</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">currency</span><span class="p">,</span>
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">opening_balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">amount</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">balance</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="n">a</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">is_transfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">is_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">currency</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">opening_balance</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+</code></pre></div></p>
+<p><strong>Monthly income / expenses by category:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="w">                  </span><span class="k">AS</span><span class="w"> </span><span class="n">category</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">amount</span><span class="p">)</span><span class="w">           </span><span class="k">AS</span><span class="w"> </span><span class="n">total</span><span class="p">,</span>
+<span class="w">    </span><span class="k">c</span><span class="p">.</span><span class="n">direction</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span><span class="n">t</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">category_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="nb">date</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">:</span><span class="n">month_start</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="nb">date</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="p">:</span><span class="n">month_end</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">is_transfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">direction</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ABS</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">amount</span><span class="p">))</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></p>
+<p><code>:month_start</code> and <code>:month_end</code> are parameterised — never string-interpolated.</p>
+<hr />
+<h2 id="configuration-files-to-create">Configuration Files to Create</h2>
+<p><code>config/csv_mappings.toml</code> — institution column mapping presets (committed to git)</p>
+<p><code>config/categories.toml</code> — seed category definitions (committed to git, used by <code>seed.py</code>)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
