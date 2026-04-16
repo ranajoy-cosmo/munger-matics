@@ -1,0 +1,84 @@
+# Default system categories seeded on first run.
+# Add, remove, or reorder entries here before running seed_categories().
+# direction must be one of: income, expense, transfer
+# sort_order controls display ordering within each direction group.
+
+[[income]]
+name = "Salary"
+sort_order = 10
+
+[[income]]
+name = "Investment Income"
+sort_order = 20
+
+[[income]]
+name = "Rental Income"
+sort_order = 30
+
+[[income]]
+name = "Tax Refund"
+sort_order = 40
+
+[[income]]
+name = "Other Income"
+sort_order = 99
+
+[[expense]]
+name = "Housing"
+sort_order = 10
+
+[[expense]]
+name = "Groceries"
+sort_order = 20
+
+[[expense]]
+name = "Dining Out"
+sort_order = 30
+
+[[expense]]
+name = "Transport"
+sort_order = 40
+
+[[expense]]
+name = "Utilities"
+sort_order = 50
+
+[[expense]]
+name = "Health"
+sort_order = 60
+
+[[expense]]
+name = "Shopping"
+sort_order = 70
+
+[[expense]]
+name = "Entertainment"
+sort_order = 80
+
+[[expense]]
+name = "Subscriptions"
+sort_order = 90
+
+[[expense]]
+name = "Education"
+sort_order = 100
+
+[[expense]]
+name = "Insurance"
+sort_order = 110
+
+[[expense]]
+name = "Fees & Charges"
+sort_order = 120
+
+[[expense]]
+name = "Other"
+sort_order = 999
+
+[[transfer]]
+name = "Transfer In"
+sort_order = 10
+
+[[transfer]]
+name = "Transfer Out"
+sort_order = 20

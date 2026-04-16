@@ -1,72 +1,101 @@
 from __future__ import annotations
 
 import hashlib
+import tomllib
+from dataclasses import dataclass
 from pathlib import Path
 
+import duckdb
 import polars as pl
+from pydantic import BaseModel
 
-_DATE_FORMAT = "%d/%m/%Y"
+# ---------------------------------------------------------------------------
+# InsertResult — returned by insert_transactions
+# ---------------------------------------------------------------------------
 
 
-def parse_ccf_csv(path: Path, account_id: str) -> pl.DataFrame:
-    """Parse a CCF (Crédit Commercial de France) CSV export and return a clean ledger DataFrame.
+class InsertResult(BaseModel):
+    rows_attempted: int
+    rows_inserted: int
+    rows_skipped: int
 
-    CCF CSV format — semicolon-delimited, quoted fields, UTF-8 (possibly with BOM):
-        "Date operation";"Date valeur";"Libelle";"Debit";"Credit"
 
-    Amounts use French decimal notation (comma as separator, e.g. "23,95").
-    Exactly one of Debit/Credit is populated per row.
-    Debit is a positive number representing money leaving the account.
-    Credit is a positive number representing money entering the account.
+# ---------------------------------------------------------------------------
+# CsvMapping — generic bank CSV format descriptor
+# ---------------------------------------------------------------------------
 
-    All bank-specific parse functions in this module return the same DataFrame schema
-    so that the rest of the pipeline is bank-agnostic.
 
-    The import_hash is computed from raw strings before any type conversion so
-    that it remains stable across re-imports even if parsing logic changes.
-    Row position within the file is included in the payload so that two
-    legitimately identical transactions (same day, amount, merchant) are not
-    collapsed into one — re-importing the same file produces the same positions
-    and therefore the same hashes, so the DB UNIQUE constraint still prevents
-    double-import.
-    Hash payload: account_id|row_position|Date operation|Debit|Credit|Libelle
+@dataclass
+class CsvMapping:
+    separator: str
+    date_format: str
+    date_col: str
+    value_date_col: str
+    description_col: str
+    debit_col: str
+    credit_col: str
+    decimal_separator: str
+
+
+def load_mapping(bank_name: str, config_path: Path) -> CsvMapping:
+    """Load a bank's CSV mapping from a TOML config file.
 
     Args:
-        path: Path to the raw CSV file.
-        account_id: UUID string of the account this file belongs to.
+        bank_name:   Key inside the TOML file, e.g. ``"ccf_checking"`` or ``"ccf_livret_a"``.
+        config_path: Absolute path to the TOML file (typically
+                     ``project_root / "config" / "csv_mappings.toml"``).
 
-    Returns:
-        DataFrame with columns:
-            account_id   String
-            date         Date    booking date ("Date operation")
-            value_date   Date    value date   ("Date valeur")
-            amount       Decimal(scale=2)  negative=debit, positive=credit
-            description  String  raw Libelle
-            source       String  always 'csv_import'
-            import_hash  String  SHA-256 dedup key
+    Raises:
+        KeyError: if bank_name is not a section in the config file.
     """
-    raw = pl.read_csv(path, separator=";", infer_schema=False)
+    with config_path.open("rb") as f:
+        data = tomllib.load(f)
+    if bank_name not in data:
+        raise KeyError(f"No CSV mapping defined for bank {bank_name!r}")
+    raw = data[bank_name]
+    return CsvMapping(
+        separator=raw["separator"],
+        date_format=raw["date_format"],
+        date_col=raw["date_col"],
+        value_date_col=raw["value_date_col"],
+        description_col=raw["description_col"],
+        debit_col=raw["debit_col"],
+        credit_col=raw["credit_col"],
+        decimal_separator=raw["decimal_separator"],
+    )
 
-    # Strip BOM from column names — some French bank exports include a UTF-8 BOM
-    # which attaches invisibly to the first column name.
+
+# ---------------------------------------------------------------------------
+# Generic CSV parser — bank-agnostic, driven by CsvMapping
+# ---------------------------------------------------------------------------
+
+
+def parse_csv(path: Path, account_id: str, mapping: CsvMapping) -> pl.DataFrame:
+    """Parse any bank CSV export using the supplied column mapping.
+
+    Produces the same 7-column schema as all bank parsers so that the rest
+    of the pipeline is bank-agnostic.  Use ``load_mapping`` to obtain a
+    ``CsvMapping`` from ``config/csv_mappings.toml``.
+
+    The dedup hash covers the same payload as ``parse_ccf_csv``:
+        account_id | row_position | date_col | debit_col | credit_col | description_col
+    """
+    raw = pl.read_csv(path, separator=mapping.separator, infer_schema=False)
+
+    # Strip BOM from the first column name (common in French bank exports).
     raw = raw.rename({c: c.lstrip("\ufeff") for c in raw.columns})
 
-    # Add a stable row index. This is included in the hash so that two legitimately
-    # identical transactions in the same file (same date, amount, description) get
-    # distinct hashes. Re-importing the same file produces the same row positions,
-    # so the DB UNIQUE constraint still prevents double-import.
     raw = raw.with_row_index("_row_idx")
 
-    # Compute hash from raw strings before any transformation.
     import_hashes = (
         pl.concat_str(
             [
                 pl.lit(account_id),
                 pl.col("_row_idx").cast(pl.String),
-                pl.col("Date operation"),
-                pl.col("Debit"),
-                pl.col("Credit"),
-                pl.col("Libelle"),
+                pl.col(mapping.date_col),
+                pl.col(mapping.debit_col),
+                pl.col(mapping.credit_col),
+                pl.col(mapping.description_col),
             ],
             separator="|",
         )
@@ -77,30 +106,30 @@ def parse_ccf_csv(path: Path, account_id: str) -> pl.DataFrame:
         .alias("import_hash")
     )
 
-    # Parse amounts: replace French decimal comma with dot, then cast to Decimal.
-    # strict=False means empty strings cast to null rather than raising an error.
-    # Debit is negated (money leaving the account); null.neg() stays null.
-    # Exactly one of the two columns is non-empty per row; coalesce picks it.
     debit = (
-        pl.col("Debit")
-        .str.replace(",", ".")
+        pl.col(mapping.debit_col)
+        .str.replace(mapping.decimal_separator, ".", literal=True)
         .cast(pl.Decimal(scale=2), strict=False)
         .neg()
     )
     credit = (
-        pl.col("Credit").str.replace(",", ".").cast(pl.Decimal(scale=2), strict=False)
+        pl.col(mapping.credit_col)
+        .str.replace(mapping.decimal_separator, ".", literal=True)
+        .cast(pl.Decimal(scale=2), strict=False)
     )
 
     return (
         raw.with_columns(import_hashes)
         .with_columns(
-            pl.col("Date operation").str.strptime(pl.Date, _DATE_FORMAT).alias("date"),
-            pl.col("Date valeur")
-            .str.strptime(pl.Date, _DATE_FORMAT)
+            pl.col(mapping.date_col)
+            .str.strptime(pl.Date, mapping.date_format)
+            .alias("date"),
+            pl.col(mapping.value_date_col)
+            .str.strptime(pl.Date, mapping.date_format)
             .alias("value_date"),
             debit.alias("_debit"),
             credit.alias("_credit"),
-            pl.col("Libelle").alias("description"),
+            pl.col(mapping.description_col).alias("description"),
             pl.lit(account_id).alias("account_id"),
             pl.lit("csv_import").alias("source"),
         )
@@ -116,4 +145,55 @@ def parse_ccf_csv(path: Path, account_id: str) -> pl.DataFrame:
                 "import_hash",
             ]
         )
+    )
+
+
+# ---------------------------------------------------------------------------
+# DB insert — idempotent, deduplicates on import_hash
+# ---------------------------------------------------------------------------
+
+
+def insert_transactions(
+    conn: duckdb.DuckDBPyConnection, df: pl.DataFrame
+) -> InsertResult:
+    """Insert a parsed transaction DataFrame into the ``transactions`` table.
+
+    Duplicate rows (matched by ``import_hash``) are silently skipped so the
+    same CSV can be re-imported without creating duplicates.
+
+    If the DataFrame contains a ``category_id`` column (e.g. after calling
+    ``apply_rules``), it is included in the insert.  Otherwise ``category_id``
+    defaults to NULL.
+
+    Returns:
+        ``InsertResult`` with ``rows_attempted``, ``rows_inserted``,
+        ``rows_skipped``.
+    """
+    rows_attempted = len(df)
+
+    # Ensure category_id column exists so the INSERT statement is uniform.
+    if "category_id" not in df.columns:
+        df = df.with_columns(pl.lit(None).cast(pl.String).alias("category_id"))
+
+    conn.register("_import_df", df)
+    try:
+        returning = conn.execute("""
+            INSERT INTO transactions
+                (account_id, date, value_date, amount, description,
+                 source, import_hash, category_id)
+            SELECT
+                account_id, date, value_date, amount::DECIMAL(15,2), description,
+                source, import_hash, category_id
+            FROM _import_df
+            ON CONFLICT (import_hash) DO NOTHING
+            RETURNING id
+        """).fetchall()
+    finally:
+        conn.unregister("_import_df")
+
+    rows_inserted = len(returning)
+    return InsertResult(
+        rows_attempted=rows_attempted,
+        rows_inserted=rows_inserted,
+        rows_skipped=rows_attempted - rows_inserted,
     )

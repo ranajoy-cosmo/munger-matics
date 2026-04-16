@@ -1,0 +1,44 @@
+# Bank CSV format mappings.
+#
+# Each section key is the bank_name string passed to load_mapping().
+# All fields are required.
+#
+# Fields:
+#   separator         — CSV column separator character
+#   date_format       — strptime format string for both date columns
+#   date_col          — column name for booking date
+#   value_date_col    — column name for value date
+#   description_col   — column name for the transaction label / libelle
+#   debit_col         — column name for debit amounts (money out, positive number)
+#   credit_col        — column name for credit amounts (money in, positive number)
+#   decimal_separator — decimal separator used in amount columns ("," or ".")
+
+[ccf_checking]
+separator         = ";"
+date_format       = "%d/%m/%Y"
+date_col          = "Date operation"
+value_date_col    = "Date valeur"
+description_col   = "Libelle"
+debit_col         = "Debit"
+credit_col        = "Credit"
+decimal_separator = ","
+
+[ccf_livret_a]
+separator         = ";"
+date_format       = "%d/%m/%Y"
+date_col          = "Date operation"
+value_date_col    = "Date valeur"
+description_col   = "Libelle"
+debit_col         = "Debit"
+credit_col        = "Credit"
+decimal_separator = ","
+
+[ccf_ldds]
+separator         = ";"
+date_format       = "%d/%m/%Y"
+date_col          = "Date operation"
+value_date_col    = "Date valeur"
+description_col   = "Libelle"
+debit_col         = "Debit"
+credit_col        = "Credit"
+decimal_separator = ","

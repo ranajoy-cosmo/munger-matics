@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help install run test lint typecheck format format-check docs hooks
+.PHONY: help install run test lint typecheck format format-check docs hooks clean
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
@@ -31,3 +31,9 @@ format-check: ## Check formatting without modifying files (used in CI)
 
 docs: ## Serve documentation locally
 	uv run mkdocs serve
+
+clean: ## Remove generated caches and local build artifacts
+	rm -rf .pytest_cache .mypy_cache .ruff_cache htmlcov site
+	rm -f .coverage .coverage.*
+	find . -type d -name __pycache__ -prune -exec rm -rf {} +
+	find . -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
